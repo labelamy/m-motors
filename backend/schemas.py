@@ -15,7 +15,7 @@ class VehiculeResponse(VehiculeBase):
     available: bool
 
     class Config:
-        orm_mode = True
+        from_attributes = True
         
 
 class UserCreate(BaseModel):
@@ -32,8 +32,22 @@ class UserResponse(BaseModel):
     role: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class Token(BaseModel):
     access_token: str
-    token_type: str
+    token_type: str 
+
+class DossierCreate(BaseModel):
+    vehicule_id: int
+    type: str
+
+class DossierResponse(BaseModel):
+    id: int
+    user_id: int
+    vehicule_id: int
+    type: str
+    status: str
+
+    class Config:
+        from_attributes = True

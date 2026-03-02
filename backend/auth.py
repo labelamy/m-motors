@@ -6,6 +6,7 @@ from fastapi.security import OAuth2PasswordBearer
 from database import SessionLocal
 import models
 from sqlalchemy.orm import Session
+from passlib.context import CryptContext
 
 SECRET_KEY = "supersecretkey"
 ALGORITHM = "HS256"
@@ -54,3 +55,4 @@ def get_current_admin(current_user: models.User = Depends(get_current_user)):
     if current_user.role != "admin":
         raise HTTPException(status_code=403, detail="Accès réservé aux admins")
     return current_user
+
