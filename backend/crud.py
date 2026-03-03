@@ -1,3 +1,5 @@
+from http.client import HTTPException
+
 from sqlalchemy.orm import Session
 import models
 import schemas
@@ -14,6 +16,13 @@ def get_vehicules(db: Session):
     return db.query(models.Vehicule).all()
 
 def create_user(db, user):
+    existing_user = db.query(models.User).filter(
+        models.User.email == user.email
+    ).first()
+
+    if existing_user:
+        raise HTTPException(status_code=400, detail="Email déjà utilisé")
+
     hashed_pwd = hash_password(user.password)
     db_user = models.User(email=user.email, password=hashed_pwd)
     db.add(db_user)
