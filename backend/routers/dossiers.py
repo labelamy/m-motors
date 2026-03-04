@@ -117,3 +117,41 @@ def update_dossier_status(
     db.commit()
 
     return {"message": f"Dossier {status}"}
+
+@router.put("/{dossier_id}/validate")
+def validate_dossier(
+    dossier_id: int,
+    db: Session = Depends(get_db),
+    current_user = Depends(get_current_user)
+):
+    if current_user.role != "admin":
+        raise HTTPException(status_code=403, detail="Accès interdit")
+
+    dossier = db.query(models.Dossier).filter(models.Dossier.id == dossier_id).first()
+
+    if not dossier:
+        raise HTTPException(status_code=404, detail="Dossier introuvable")
+
+    dossier.status = models.DossierStatus.VALIDE
+    db.commit()
+
+    return {"message": "Dossier validé"}
+
+@router.put("/{dossier_id}/refuse")
+def refuse_dossier(
+    dossier_id: int,
+    db: Session = Depends(get_db),
+    current_user = Depends(get_current_user)
+):
+    if current_user.role != "admin":
+        raise HTTPException(status_code=403, detail="Accès interdit")
+
+    dossier = db.query(models.Dossier).filter(models.Dossier.id == dossier_id).first()
+
+    if not dossier:
+        raise HTTPException(status_code=404, detail="Dossier introuvable")
+
+    dossier.status = models.DossierStatus.REFUSE
+    db.commit()
+
+    return {"message": "Dossier refusé"}

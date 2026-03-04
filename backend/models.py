@@ -1,6 +1,8 @@
 from datetime import datetime, timezone
 from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Float, Boolean
 from database import Base
+import enum
+from sqlalchemy import Enum
 
 class User(Base):
     __tablename__ = "users"
@@ -19,6 +21,10 @@ class Vehicule(Base):
     type = Column(String)
     available = Column(Boolean, default=True)
 
+class DossierStatus(str, enum.Enum):
+    EN_ATTENTE = "EN_ATTENTE"
+    VALIDE = "VALIDE"
+    REFUSE = "REFUSE"
 
 class Dossier(Base):
     __tablename__ = "dossiers"
@@ -26,9 +32,10 @@ class Dossier(Base):
     user_id = Column(Integer, ForeignKey("users.id"))
     vehicule_id = Column(Integer, ForeignKey("vehicules.id"))
     type = Column(String, nullable=False)
-    status = Column(String, default="en_attente")
+    status = Column(Enum(DossierStatus), default=DossierStatus.EN_ATTENTE)
     created_at = Column(
         DateTime(timezone=True),
         default=lambda: datetime.now(timezone.utc)
     )
     document_path = Column(String, nullable=True)
+
