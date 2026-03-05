@@ -18,6 +18,7 @@ function Navbar() {
           <>
             <Link className="btn btn-outline-light me-2" to="/login">Login</Link>
             <Link className="btn btn-light" to="/register">Register</Link>
+            <Link className="nav-link" to="/dossiers"> Mes Dossiers</Link>
           </>
         ) : (
           <button className="btn btn-danger" onClick={handleLogout}>

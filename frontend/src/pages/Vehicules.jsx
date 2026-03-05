@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
 
-function Vehicles() {
-  const [vehicles, setVehicles] = useState([]);
+function Vehicules() {
+  const [vehicules, setVehicules] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchVehicles = async () => {
+    const fetchVehicules = async () => {
       try {
         const response = await API.get("/vehicules/");
-        setVehicles(response.data);
+        setVehicules(response.data);
       } catch (error) {
         console.error("Erreur lors de la récupération des véhicules :", error);
       } finally {
@@ -17,8 +17,22 @@ function Vehicles() {
       }
     };
 
-    fetchVehicles();
+    fetchVehicules();
   }, []);
+
+ const handleCreateDossier = async (vehiculeId) => {
+    try {
+      await API.post("/dossiers/", {
+        vehicule_id: vehiculeId,
+        type: "achat"
+      });
+
+      alert("Dossier créé avec succès !");
+    } catch (error) {
+      console.error(error);
+      alert("Erreur lors de la création du dossier");
+    }
+  };
 
   if (loading) {
     return <p>Chargement des véhicules...</p>;
@@ -27,11 +41,11 @@ function Vehicles() {
   return (
     <div className="container mt-5">
       <h2>Liste des véhicules</h2>
-      {vehicles.length === 0 ? (
+      {vehicules.length === 0 ? (
         <p>Aucun véhicule disponible.</p>
       ) : (
         <div className="row">
-          {vehicles.map((v) => (
+          {vehicules.map((v) => (
             <div key={v.id} className="col-md-4 mb-3">
               <div className="card">
                 <div className="card-body">
@@ -41,6 +55,11 @@ function Vehicles() {
                   <p className="card-text">
                     {v.available ? "Disponible" : "Indisponible"}
                   </p>
+                   <button
+                    className="btn btn-primary mt-2"
+                    onClick={() => handleCreateDossier(v.id)}>
+                    Créer un dossier
+                  </button>
                 </div>
               </div>
             </div>
@@ -51,4 +70,4 @@ function Vehicles() {
   );
 }
 
-export default Vehicles;
+export default Vehicules;
