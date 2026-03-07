@@ -1,10 +1,13 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Vehicles from "./pages/Vehicules";
+import Vehicules from "./pages/Vehicules";
 import PrivateRoute from "./components/PrivateRoute";
 import Navbar from "./components/Navbar";
 import Dossiers from "./pages/Dossiers";
+import AdminDashboard from "./pages/AdminDashboard";
+
+import "./App.css";
 
 function App() {
   return (
@@ -24,7 +27,7 @@ function App() {
           path="/vehicules"
           element={
             <PrivateRoute>
-              <Vehicles />
+              <Vehicules />
             </PrivateRoute>
           }
         />
@@ -38,6 +41,13 @@ function App() {
         />
         {/* Route fallback si URL inconnue */}
         <Route path="*" element={<Navigate to="/login" />} />
+        <Route path="/admin"
+                element={
+                  <PrivateRoute>
+                    <AdminDashboard />
+                  </PrivateRoute>
+                }
+              />
       </Routes>
     </Router>
   );

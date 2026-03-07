@@ -6,6 +6,7 @@ from database import engine
 import models
 from routers import vehicule, user, dossiers
 from logging_config import logger
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
@@ -26,7 +27,7 @@ app.add_middleware(
 
 # -----------------------
 # Création tables + test DB
-# -----------------------
+# models.Base.metadata.drop_all(bind=engine)
 models.Base.metadata.create_all(bind=engine)
 
 with engine.connect() as conn:
@@ -59,3 +60,9 @@ async def global_exception_handler(request: Request, exc: Exception):
         status_code=500,
         content={"detail": "Erreur interne du serveur"}
     )
+
+# --------------------------------------------------------------
+# Servir les fichiers statiques (images de véhicules & uploads)
+# --------------------------------------------------------------
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
+app.mount("/images", StaticFiles(directory="images"), name="images")

@@ -18,6 +18,42 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+.login-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.login-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.register-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.register-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.vehicule-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vehicule-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+}
+
+.dossier-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dossier-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -39,4 +75,8 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.container {
+  padding-top: 20px;
 }

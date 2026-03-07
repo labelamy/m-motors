@@ -4,3 +4,393 @@
 2026-03-03 19:30:26,696 | WARNING | m-motors | Echec connexion pour user@example.com
 2026-03-03 19:31:47,045 | INFO | m-motors | Tentative de connexion pour admin@test.com
 2026-03-03 19:31:47,429 | INFO | m-motors | Connexion réussie pour admin@test.com
+2026-03-07 04:09:53,774 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:09:54,250 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:10:08,703 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:10:09,030 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:10:11,187 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:10:11,521 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:12:32,795 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:12:32,979 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:12:58,691 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:12:59,026 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:13:00,089 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:13:00,429 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:13:34,364 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:13:34,384 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:13:53,525 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:13:53,774 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:13:57,876 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:13:58,201 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:20:41,387 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:20:41,686 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:20:57,601 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:20:57,624 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:20:59,055 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:20:59,321 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:21:07,099 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:21:07,424 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:45:38,326 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:45:38,610 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 04:47:20,319 | ERROR | m-motors | Erreur serveur: 8 validation errors:
+  {'type': 'bool_type', 'loc': ('response', 3, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 4, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 5, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 6, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 7, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 8, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 9, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+  {'type': 'bool_type', 'loc': ('response', 10, 'available'), 'msg': 'Input should be a valid boolean', 'input': None}
+
+  File "C:\Users\lamya\m-motors\backend\routers\vehicule.py", line 24, in read_all
+    GET /vehicules/
+2026-03-07 05:33:56,300 | ERROR | m-motors | Erreur serveur: (psycopg2.errors.UndefinedColumn) ERREUR:  la colonne vehicules.year n'existe pas
+LINE 1: ...icules_brand, vehicules.model AS vehicules_model, vehicules....
+                                                             ^
+
+[SQL: SELECT vehicules.id AS vehicules_id, vehicules.brand AS vehicules_brand, vehicules.model AS vehicules_model, vehicules.year AS vehicules_year, vehicules.price AS vehicules_price, vehicules.kilometrage AS vehicules_kilometrage, vehicules.carburant AS vehicules_carburant, vehicules.transmission AS vehicules_transmission, vehicules.type AS vehicules_type, vehicules.description AS vehicules_description, vehicules.image_url AS vehicules_image_url, vehicules.available AS vehicules_available, vehicules.created_at AS vehicules_created_at 
+FROM vehicules]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-03-07 05:33:56,535 | ERROR | m-motors | Erreur serveur: (psycopg2.errors.UndefinedColumn) ERREUR:  la colonne vehicules.year n'existe pas
+LINE 1: ...icules_brand, vehicules.model AS vehicules_model, vehicules....
+                                                             ^
+
+[SQL: SELECT vehicules.id AS vehicules_id, vehicules.brand AS vehicules_brand, vehicules.model AS vehicules_model, vehicules.year AS vehicules_year, vehicules.price AS vehicules_price, vehicules.kilometrage AS vehicules_kilometrage, vehicules.carburant AS vehicules_carburant, vehicules.transmission AS vehicules_transmission, vehicules.type AS vehicules_type, vehicules.description AS vehicules_description, vehicules.image_url AS vehicules_image_url, vehicules.available AS vehicules_available, vehicules.created_at AS vehicules_created_at 
+FROM vehicules]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-03-07 05:34:11,344 | ERROR | m-motors | Erreur serveur: (psycopg2.errors.UndefinedColumn) ERREUR:  la colonne vehicules.year n'existe pas
+LINE 1: ...icules_brand, vehicules.model AS vehicules_model, vehicules....
+                                                             ^
+
+[SQL: SELECT vehicules.id AS vehicules_id, vehicules.brand AS vehicules_brand, vehicules.model AS vehicules_model, vehicules.year AS vehicules_year, vehicules.price AS vehicules_price, vehicules.kilometrage AS vehicules_kilometrage, vehicules.carburant AS vehicules_carburant, vehicules.transmission AS vehicules_transmission, vehicules.type AS vehicules_type, vehicules.description AS vehicules_description, vehicules.image_url AS vehicules_image_url, vehicules.available AS vehicules_available, vehicules.created_at AS vehicules_created_at 
+FROM vehicules]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-03-07 05:34:11,663 | ERROR | m-motors | Erreur serveur: (psycopg2.errors.UndefinedColumn) ERREUR:  la colonne vehicules.year n'existe pas
+LINE 1: ...icules_brand, vehicules.model AS vehicules_model, vehicules....
+                                                             ^
+
+[SQL: SELECT vehicules.id AS vehicules_id, vehicules.brand AS vehicules_brand, vehicules.model AS vehicules_model, vehicules.year AS vehicules_year, vehicules.price AS vehicules_price, vehicules.kilometrage AS vehicules_kilometrage, vehicules.carburant AS vehicules_carburant, vehicules.transmission AS vehicules_transmission, vehicules.type AS vehicules_type, vehicules.description AS vehicules_description, vehicules.image_url AS vehicules_image_url, vehicules.available AS vehicules_available, vehicules.created_at AS vehicules_created_at 
+FROM vehicules]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-03-07 05:39:53,103 | ERROR | m-motors | Erreur serveur: (psycopg2.errors.UndefinedColumn) ERREUR:  la colonne vehicules.year n'existe pas
+LINE 1: ...icules_brand, vehicules.model AS vehicules_model, vehicules....
+                                                             ^
+
+[SQL: SELECT vehicules.id AS vehicules_id, vehicules.brand AS vehicules_brand, vehicules.model AS vehicules_model, vehicules.year AS vehicules_year, vehicules.price AS vehicules_price, vehicules.kilometrage AS vehicules_kilometrage, vehicules.carburant AS vehicules_carburant, vehicules.transmission AS vehicules_transmission, vehicules.type AS vehicules_type, vehicules.description AS vehicules_description, vehicules.image_url AS vehicules_image_url, vehicules.available AS vehicules_available, vehicules.created_at AS vehicules_created_at 
+FROM vehicules]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-03-07 05:39:53,371 | ERROR | m-motors | Erreur serveur: (psycopg2.errors.UndefinedColumn) ERREUR:  la colonne vehicules.year n'existe pas
+LINE 1: ...icules_brand, vehicules.model AS vehicules_model, vehicules....
+                                                             ^
+
+[SQL: SELECT vehicules.id AS vehicules_id, vehicules.brand AS vehicules_brand, vehicules.model AS vehicules_model, vehicules.year AS vehicules_year, vehicules.price AS vehicules_price, vehicules.kilometrage AS vehicules_kilometrage, vehicules.carburant AS vehicules_carburant, vehicules.transmission AS vehicules_transmission, vehicules.type AS vehicules_type, vehicules.description AS vehicules_description, vehicules.image_url AS vehicules_image_url, vehicules.available AS vehicules_available, vehicules.created_at AS vehicules_created_at 
+FROM vehicules]
+(Background on this error at: https://sqlalche.me/e/20/f405)

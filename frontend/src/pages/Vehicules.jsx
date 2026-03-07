@@ -5,67 +5,91 @@ function Vehicules() {
   const [vehicules, setVehicules] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchVehicules = async () => {
-      try {
-        const response = await API.get("/vehicules/");
-        setVehicules(response.data);
-      } catch (error) {
-        console.error("Erreur lors de la récupération des véhicules :", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchVehicules();
-  }, []);
-
- const handleCreateDossier = async (vehiculeId) => {
+  const fetchVehicules = async () => {
     try {
-      await API.post("/dossiers/", {
-        vehicule_id: vehiculeId,
-        type: "achat"
-      });
-
-      alert("Dossier créé avec succès !");
+      const res = await API.get("/vehicules/");
+      setVehicules(res.data);
     } catch (error) {
-      console.error(error);
-      alert("Erreur lors de la création du dossier");
+      console.error("Erreur récupération véhicules :", error);
+    } finally {
+      setLoading(false);
     }
   };
 
+  useEffect(() => {
+    fetchVehicules();
+  }, []);
+
   if (loading) {
-    return <p>Chargement des véhicules...</p>;
+    return (
+      <div className="container text-center mt-5">
+        <div className="spinner-border text-primary"></div>
+        <p className="mt-3">Chargement des véhicules...</p>
+      </div>
+    );
   }
 
   return (
-    <div className="container mt-5">
-      <h2>Liste des véhicules</h2>
-      {vehicules.length === 0 ? (
-        <p>Aucun véhicule disponible.</p>
-      ) : (
-        <div className="row">
-          {vehicules.map((v) => (
-            <div key={v.id} className="col-md-4 mb-3">
-              <div className="card">
-                <div className="card-body">
-                  <h5 className="card-title">{v.brand} {v.model}</h5>
-                  <p className="card-text">Type : {v.type}</p>
-                  <p className="card-text">Prix : {v.price} €</p>
-                  <p className="card-text">
-                    {v.available ? "Disponible" : "Indisponible"}
-                  </p>
-                   <button
-                    className="btn btn-primary mt-2"
-                    onClick={() => handleCreateDossier(v.id)}>
-                    Créer un dossier
-                  </button>
-                </div>
+    <div className="container py-5">
+      <h2 className="mb-4">🚗 Véhicules Disponibles</h2>
+      <div className="row g-4">
+        {vehicules.length === 0 && (
+          <div className="alert alert-info text-center shadow-sm">
+            Aucun véhicule disponible.
+          </div>
+        )}
+
+        {vehicules.map((v) => (
+          <div key={v.id} className="col-12 col-md-6 col-lg-4">
+            <div className="card h-100 shadow-sm border-0">
+
+              {/* Image */}
+              {v.image_url && (
+                <img
+                  src={`http://localhost:8000${v.image_url}`}
+                  alt={v.model}
+                  className="card-img-top"
+                  style={{ height: 180, objectFit: "cover" }}
+                />
+              )}
+
+              <div className="card-body d-flex flex-column">
+                <h5 className="card-title fw-bold">
+                  {v.brand} {v.model} ({v.year})
+                </h5>
+
+                <p className="mb-1">
+                  <strong>Prix :</strong> ${v.price.toLocaleString()}
+                </p>
+
+                <p className="mb-1">
+                  <strong>Kilométrage :</strong> {v.kilometrage} km
+                </p>
+
+                <p className="mb-1">
+                  <strong>Carburant :</strong> {v.carburant}
+                </p>
+
+                <p className="mb-1">
+                  <strong>Transmission :</strong> {v.transmission}
+                </p>
+
+                <p className="mb-1">
+                  <strong>Type :</strong> {v.type}
+                </p>
+
+                <p className="mb-2">
+                  {v.description}
+                </p>
+
+                <span className={`badge ${v.available ? "bg-success" : "bg-danger"}`}>
+                  {v.available ? "Disponible" : "Indisponible"}
+                </span>
               </div>
             </div>
-          ))}
-        </div>
-      )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

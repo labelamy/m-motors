@@ -34,8 +34,6 @@ function Dossiers() {
       });
 
       alert("Document uploadé avec succès ✅");
-
-      // 🔁 Refresh des dossiers
       fetchDossiers();
 
     } catch (error) {
@@ -44,51 +42,77 @@ function Dossiers() {
     }
   };
 
+  const getStatusBadge = (status) => {
+    switch (status) {
+      case "VALIDE":
+        return "badge bg-success";
+      case "REFUSE":
+        return "badge bg-danger";
+      default:
+        return "badge bg-warning text-dark";
+    }
+  };
+
   if (loading) {
-    return <p className="text-center mt-5">Chargement des dossiers...</p>;
+    return (
+      <div className="container mt-5 text-center">
+        <div className="spinner-border text-primary"></div>
+        <p className="mt-3">Chargement des dossiers...</p>
+      </div>
+    );
   }
 
   return (
-    <div className="container mt-5">
-      <h2 className="mb-4">Mes Dossiers</h2>
+    <div className="container py-5">
+
+      <div className="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+        <h2 className="fw-bold">📁 Mes Dossiers</h2>
+        <span className="text-muted">
+          {dossiers.length} dossier(s)
+        </span>
+      </div>
 
       {dossiers.length === 0 ? (
-        <div className="alert alert-info">
+        <div className="alert alert-info text-center shadow-sm">
           Aucun dossier trouvé.
         </div>
       ) : (
-        <div className="row">
+        <div className="row g-4">
           {dossiers.map((d) => (
-            <div key={d.id} className="col-md-6 mb-4">
-              <div className="card shadow-sm">
-                <div className="card-body">
+            <div
+              key={d.id}
+              className="col-12 col-md-6 col-lg-4"
+            >
+              <div className="card h-100 shadow-sm border-0 dossier-card">
 
-                  <h5 className="card-title">
-                    Dossier #{d.id}
+                <div className="card-body d-flex flex-column">
+
+                  <h5 className="card-title fw-bold mb-3">
+                    📄 Dossier #{d.id}
                   </h5>
 
-                  <p><strong>Véhicule ID:</strong> {d.vehicule_id}</p>
-                  <p><strong>Type:</strong> {d.type}</p>
+                  <p className="mb-1">
+                    <strong>Véhicule :</strong> {d.vehicule_id}
+                  </p>
 
-                  <p>
-                    <strong>Status:</strong>{" "}
-                    <span className={
-                      d.status === "VALIDE"
-                        ? "badge bg-success"
-                        : d.status === "REFUSE"
-                        ? "badge bg-danger"
-                        : "badge bg-warning text-dark"
-                    }>
+                  <p className="mb-2">
+                    <strong>Type :</strong> {d.type}
+                  </p>
+
+                  <p className="mb-3">
+                    <strong>Status :</strong>{" "}
+                    <span className={getStatusBadge(d.status)}>
                       {d.status}
                     </span>
                   </p>
 
                   {/* Upload autorisé seulement si EN_ATTENTE */}
                   {d.status === "EN_ATTENTE" && (
-                    <div className="mt-3">
+                    <div className="mt-auto">
                       <label className="form-label">
-                        Ajouter un document :
+                        📎 Ajouter un document
                       </label>
+
                       <input
                         type="file"
                         className="form-control"
@@ -98,22 +122,37 @@ function Dossiers() {
                       />
                     </div>
                   )}
+                  
+                  {/* Lien vers le document s'il existe */}
+                    {d.document_path && (
+                      <div className="mt-2">
+                        <a
+                          href={`http://localhost:8000${d.document_path}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn btn-outline-secondary btn-sm"
+                        >
+                          📄 Voir document
+                        </a>
+                      </div>
+                    )}
 
-                  {/* Message si validé */}
+                  {/* Message validé */}
                   {d.status === "VALIDE" && (
-                    <div className="alert alert-success mt-3">
-                       Dossier validé par l'administrateur
+                    <div className="alert alert-success mt-auto">
+                      ✅ Dossier validé par l'administrateur
                     </div>
                   )}
 
-                  {/* Message si refusé */}
+                  {/* Message refusé */}
                   {d.status === "REFUSE" && (
-                    <div className="alert alert-danger mt-3">
-                       Dossier refusé par l'administrateur
+                    <div className="alert alert-danger mt-auto">
+                      ❌ Dossier refusé par l'administrateur
                     </div>
                   )}
 
                 </div>
+
               </div>
             </div>
           ))}

@@ -10,21 +10,59 @@ function Navbar() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-3">
-      <Link className="navbar-brand" to="/">M-Motors</Link>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div className="container">
 
-      <div className="ms-auto">
-        {!token ? (
-          <>
-            <Link className="btn btn-outline-light me-2" to="/login">Login</Link>
-            <Link className="btn btn-light" to="/register">Register</Link>
-            <Link className="nav-link" to="/dossiers"> Mes Dossiers</Link>
-          </>
-        ) : (
-          <button className="btn btn-danger" onClick={handleLogout}>
-            Logout
-          </button>
-        )}
+        {/* Logo */}
+        <Link className="navbar-brand fw-bold" to="/">
+          🚗 M-Motors
+        </Link>
+
+        {/* Hamburger menu mobile */}
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ms-auto">
+
+            {/* Liens visibles si utilisateur connecté */}
+            {token ? (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/">Véhicules</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/dossiers">Mes Dossiers</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/admin">Admin</Link>
+                </li>
+                <li className="nav-item">
+                  <button className="btn btn-danger ms-2" onClick={handleLogout}>
+                    Logout
+                  </button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <Link className="btn btn-outline-light me-2" to="/login">Login</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="btn btn-light" to="/register">Register</Link>
+                </li>
+              </>
+            )}
+
+          </ul>
+        </div>
+
       </div>
     </nav>
   );

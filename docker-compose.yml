@@ -25,5 +25,10 @@ services:
     environment:
       DATABASE_URL: postgresql://postgres:Motdepasse123@db:5433/motors
 
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+
 volumes:
   postgres_data:
