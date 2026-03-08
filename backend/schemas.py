@@ -1,23 +1,30 @@
 from pydantic import BaseModel, EmailStr
 from typing import Optional
+from datetime import datetime
 
 class VehiculeBase(BaseModel):
     brand: str
     model: str
     price: float
     type: str  # achat ou location
-
+    year: Optional[int] = None
+    kilometrage: Optional[int] = None
+    carburant: Optional[str] = None
+    transmission: Optional[str] = None
+    description: Optional[str] = None
+    image_url: Optional[str] = None
+    
 class VehiculeCreate(VehiculeBase):
     pass
 
 class VehiculeResponse(VehiculeBase):
     id: int
     available: bool
+    created_at: Optional[datetime] = None
 
     class Config:
         from_attributes = True
         
-
 class UserCreate(BaseModel):
     email: EmailStr
     password: str

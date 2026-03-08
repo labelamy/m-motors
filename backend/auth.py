@@ -3,8 +3,8 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
-from database import SessionLocal
-import models
+from backend.database import SessionLocal
+import backend.models as models
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
 

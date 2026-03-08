@@ -80,3 +80,23 @@
 .container {
   padding-top: 20px;
 }
+
+.badge-status {
+  font-size: 0.9rem;
+  padding: 8px 14px;
+  border-radius: 20px;
+}
+
+.btn-choose {
+  background-color: #198754;
+  color: white;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.btn-choose:hover {
+  background-color: #dc3545;
+  transform: scale(1.05);
+}

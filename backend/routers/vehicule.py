@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from database import SessionLocal
-import schemas, crud
-from auth import get_current_admin
+from backend.database import SessionLocal
+from backend import crud
+import backend.schemas as schemas
+from backend.auth import get_current_admin
 
 router = APIRouter()
 

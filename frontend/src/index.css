@@ -67,3 +67,27 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* Footer global */
+footer {
+  background-color: #212529; /* Couleur sombre */
+  color: #fff;
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+  flex-shrink: 0; /* Empêche le footer de rétrécir */
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect si besoin (exemple si tu veux que le footer change légèrement au survol) */
+footer:hover {
+  background-color: #6f869c;
+}
+
+/* Responsive padding sur petits écrans */
+@media (max-width: 768px) {
+  footer {
+    padding: 0.8rem 0;
+    font-size: 0.85rem;
+  }
+}

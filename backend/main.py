@@ -2,13 +2,15 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from sqlalchemy import text
-from database import engine
-import models
-from routers import vehicule, user, dossiers
-from logging_config import logger
+from backend.database import engine
+import backend.models as models
+from backend.routers import vehicule, user, dossiers
+from backend.logging_config import logger
 from fastapi.staticfiles import StaticFiles
+from pathlib import Path 
+from backend.routers import auth
 
-app = FastAPI()
+app = FastAPI(title="Motors API", description="API pour la gestion des véhicules et dossiers de réparation", version="1.0.0")
 
 # -----------------------
 # CORS pour frontend React
@@ -45,6 +47,7 @@ with engine.connect() as conn:
 app.include_router(vehicule.router, prefix="/vehicules", tags=["Vehicules"])
 app.include_router(user.router, prefix="/auth", tags=["Auth"])
 app.include_router(dossiers.router)
+app.include_router(auth.router)
 
 @app.get("/")
 def root():
@@ -64,5 +67,8 @@ async def global_exception_handler(request: Request, exc: Exception):
 # --------------------------------------------------------------
 # Servir les fichiers statiques (images de véhicules & uploads)
 # --------------------------------------------------------------
-app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
-app.mount("/images", StaticFiles(directory="images"), name="images")
+
+BASE_DIR = Path(__file__).resolve().parent
+
+app.mount("/uploads", StaticFiles(directory=BASE_DIR / "uploads"), name="uploads")
+app.mount("/images", StaticFiles(directory=BASE_DIR / "images"), name="images")

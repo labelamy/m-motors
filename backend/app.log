@@ -394,3 +394,4 @@ LINE 1: ...icules_brand, vehicules.model AS vehicules_model, vehicules....
 [SQL: SELECT vehicules.id AS vehicules_id, vehicules.brand AS vehicules_brand, vehicules.model AS vehicules_model, vehicules.year AS vehicules_year, vehicules.price AS vehicules_price, vehicules.kilometrage AS vehicules_kilometrage, vehicules.carburant AS vehicules_carburant, vehicules.transmission AS vehicules_transmission, vehicules.type AS vehicules_type, vehicules.description AS vehicules_description, vehicules.image_url AS vehicules_image_url, vehicules.available AS vehicules_available, vehicules.created_at AS vehicules_created_at 
 FROM vehicules]
 (Background on this error at: https://sqlalche.me/e/20/f405)
+2026-03-07 16:47:40,834 | ERROR | m-motors | Erreur serveur: hash could not be identified
