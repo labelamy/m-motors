@@ -10,16 +10,12 @@ API.interceptors.request.use((config) => {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
+  }, (error) => {
+  return Promise.reject(error);
 });
 
-export const getToken = () => {
-  const token = localStorage.getItem("token");
-  if (!token) return null;
+export const getToken = () => localStorage.getItem("token");
 
-  // On peut aussi décoder le token pour vérifier sa validité (optionnel)
-  // Ici on se contente de vérifier qu'il existe
-  return token;
-};
 
 export const logout = () => {
   localStorage.removeItem("token");

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Body
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from datetime import timedelta
@@ -28,22 +28,21 @@ def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
 # ------------------------
 
 @router.post("/login", response_model=schemas.Token)
-def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
-    """
-    Authentifie l'utilisateur et retourne un JWT.
-    Utilise OAuth2PasswordRequestForm, donc attend 'username' et 'password'.
-    """
-    user = db.query(crud.models.User).filter(crud.models.User.email == form_data.username).first()
-    if not user or not verify_password(form_data.password, user.password):
+def login(data: dict = Body(...), db: Session = Depends(get_db)):
+    email = data.get("email")
+    password = data.get("password")
+    user = crud.authenticate_user(db, email, password)
+    
+    if not user :
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
+            status_code=401,
             detail="Email ou mot de passe incorrect",
-            headers={"WWW-Authenticate": "Bearer"},
+            
         )
     
     #access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
-        data={"sub": user.email}
+        data={"sub": user.email, "role": user.role},
     )
     
     return {"access_token": access_token, "token_type": "bearer"}

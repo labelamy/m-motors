@@ -62,7 +62,7 @@ def create_dossier(
 
 
 # 🔹 Voir ses dossiers
-@router.get("/")
+@router.get("/mes-dossiers", response_model=list[schemas.DossierResponse])
 def get_my_dossiers(
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user)

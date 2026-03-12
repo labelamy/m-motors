@@ -8,7 +8,7 @@ function Dossiers() {
   // 🔹 Charger les dossiers
   const fetchDossiers = async () => {
     try {
-      const response = await API.get("/dossiers/");
+      const response = await API.get("/dossiers/mes-dossiers");
       setDossiers(response.data);
     } catch (error) {
       console.error("Erreur récupération dossiers :", error);

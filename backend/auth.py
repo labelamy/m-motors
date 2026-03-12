@@ -3,10 +3,9 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
-from backend.database import SessionLocal
-import backend.models as models
+from backend.database import get_db
+from backend.models import User
 from sqlalchemy.orm import Session
-from passlib.context import CryptContext
 
 SECRET_KEY = "supersecretkey"
 ALGORITHM = "HS256"
@@ -29,12 +28,6 @@ def create_access_token(data: dict):
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     try:
@@ -45,13 +38,13 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
     except JWTError:
         raise HTTPException(status_code=401, detail="Token invalide")
 
-    user = db.query(models.User).filter(models.User.email == email).first()
+    user = db.query(User).filter(User.email == email).first()
     if user is None:
         raise HTTPException(status_code=401, detail="Utilisateur non trouvé")
 
     return user
 
-def get_current_admin(current_user: models.User = Depends(get_current_user)):
+def get_current_admin(current_user: User = Depends(get_current_user)):
     if current_user.role != "admin":
         raise HTTPException(status_code=403, detail="Accès réservé aux admins")
     return current_user

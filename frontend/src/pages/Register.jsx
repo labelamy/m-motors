@@ -30,11 +30,11 @@ function Register() {
   };
 
   return (
-    <div className="container vh-100 d-flex justify-content-center align-items-center">
+    <div className="container vh-100 d-flex justify-content-center align-items-center ">
 
-      <div className="col-12 col-md-6 col-lg-4">
+      <div className="card shadow-lg border-0 register-card" style={{ width: "100%", maxWidth: "420px" }}>
 
-        <div className="card shadow-lg border-0 register-card">
+        <div className="">
 
           <div className="card-body p-4">
 
