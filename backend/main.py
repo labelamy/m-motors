@@ -2,15 +2,18 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from sqlalchemy import text
-from backend.database import engine
-import backend.models as models
-from backend.routers import vehicule, user, dossiers
-from backend.logging_config import logger
+from database import engine
+import models
+from routers import vehicule, user, dossiers
+from logging_config import logger
 from fastapi.staticfiles import StaticFiles
-from pathlib import Path 
-from backend.routers import auth
+from pathlib import Path
 
-app = FastAPI(title="Motors API", description="API pour la gestion des véhicules et dossiers de réparation", version="1.0.0")
+app = FastAPI(
+    title="Motors API",
+    description="API pour la gestion des véhicules et dossiers de réparation",
+    version="1.0.0"
+)
 
 # -----------------------
 # CORS pour frontend React
@@ -29,12 +32,23 @@ app.add_middleware(
 
 # -----------------------
 # Création tables + test DB
-# models.Base.metadata.drop_all(bind=engine)
+# -----------------------
 models.Base.metadata.create_all(bind=engine)
 
-with engine.connect() as conn:
-    result = conn.execute(text("SELECT 1"))
-    print("Connexion à la DB OK :", list(result))
+try:
+    with engine.connect() as conn:
+        result = conn.execute(text("SELECT current_database();"))
+        print("FastAPI se connecte à la base :", list(result))
+except Exception as e:
+    print("Erreur connexion DB :", e)
+
+# Test simple pour éviter le crash si table vide
+try:
+    with engine.connect() as conn:
+        result = conn.execute(text("SELECT 1"))
+        print("Connexion DB OK :", list(result))
+except Exception as e:
+    print("Erreur test DB :", e)
 
 # -----------------------
 # Routes
@@ -42,7 +56,7 @@ with engine.connect() as conn:
 app.include_router(vehicule.router, prefix="/vehicules", tags=["Vehicules"])
 app.include_router(user.router, prefix="/auth", tags=["Auth"])
 app.include_router(dossiers.router)
-#app.include_router(auth.router)
+# app.include_router(auth.router)  # décommente si nécessaire
 
 @app.get("/")
 def root():
@@ -62,7 +76,6 @@ async def global_exception_handler(request: Request, exc: Exception):
 # --------------------------------------------------------------
 # Servir les fichiers statiques (images de véhicules & uploads)
 # --------------------------------------------------------------
-
 BASE_DIR = Path(__file__).resolve().parent
 
 (BASE_DIR / "uploads").mkdir(exist_ok=True)
