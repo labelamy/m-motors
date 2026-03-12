@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker
 
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "sqlite:///./test.db"
+    "postgresql://postgres:Motdepasse123@localhost:5433/motors"
 ) # 
 
 
