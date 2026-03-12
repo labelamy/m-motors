@@ -33,13 +33,8 @@ app.add_middleware(
 models.Base.metadata.create_all(bind=engine)
 
 with engine.connect() as conn:
-    result = conn.execute(text("SELECT current_database();"))
-    for row in result:
-        print("FastAPI se connecte à la base :", row[0])
-
-with engine.connect() as conn:
-    result = conn.execute(text("SELECT * FROM vehicules;"))
-    print("Véhicules dans la DB :", list(result))
+    result = conn.execute(text("SELECT 1"))
+    print("Connexion à la DB OK :", list(result))
 
 # -----------------------
 # Routes
@@ -69,6 +64,9 @@ async def global_exception_handler(request: Request, exc: Exception):
 # --------------------------------------------------------------
 
 BASE_DIR = Path(__file__).resolve().parent
+
+(BASE_DIR / "uploads").mkdir(exist_ok=True)
+(BASE_DIR / "images").mkdir(exist_ok=True)
 
 app.mount("/uploads", StaticFiles(directory=BASE_DIR / "uploads"), name="uploads")
 app.mount("/images", StaticFiles(directory=BASE_DIR / "images"), name="images")
