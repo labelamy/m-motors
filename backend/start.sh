@@ -5,7 +5,7 @@
 source ./venv/bin/activate
 
 # Installe les dépendances (optionnel, utile si tu veux que ça s'assure à chaque démarrage)
-pip install -r requirements.txt
+#pip install -r requirements.txt
 
 # Lancer l'application avec uvicorn
-uvicorn main:app --host 0.0.0.0 --port 8000
+uvicorn main:app --host 0.0.0.0 --port $PORT
