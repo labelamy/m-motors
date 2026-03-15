@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
 from sqlalchemy.orm import Session
-from backend.database import get_db
-import backend.models as models
-import backend.schemas as schemas
-from backend.auth import get_current_user, get_current_admin
+from database import get_db
+import models 
+import schemas 
+from auth import get_current_user, get_current_admin
 import shutil
 import os
 

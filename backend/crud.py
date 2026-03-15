@@ -1,9 +1,9 @@
 from fastapi  import HTTPException
 
 from sqlalchemy.orm import Session
-import backend.models as models
-import backend.schemas as schemas
-from backend.auth import hash_password, verify_password
+import models 
+import schemas 
+from auth import hash_password, verify_password
 
 # VEHICULES
 # -----------------------------

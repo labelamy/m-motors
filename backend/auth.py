@@ -3,8 +3,8 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
-from backend.database import get_db
-from backend.models import User
+from database import get_db
+from models import User
 from sqlalchemy.orm import Session
 
 SECRET_KEY = "supersecretkey"
