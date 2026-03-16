@@ -19,7 +19,8 @@ app = FastAPI(
 # CORS pour frontend React
 # -----------------------
 origins = [
-    "http://localhost:5173",  # ton frontend
+    "http://localhost:5173",
+    "https://m-motors.vercel.app"  
 ]
 
 app.add_middleware(

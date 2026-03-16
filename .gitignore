@@ -3,8 +3,18 @@ backend/venv/
 
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 
 *.log
 
 .pytest_cache/
 .coverage
+
+# virtual environment
+.env
+
+
+# uploads
+uploads/
+images/
