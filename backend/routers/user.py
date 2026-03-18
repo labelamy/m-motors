@@ -3,8 +3,10 @@ from sqlalchemy.orm import Session
 from database import SessionLocal
 import crud 
 import schemas 
-from auth import create_access_token
+from auth import create_access_token, get_current_user
 from models import User
+from typing import List
+
 
 router = APIRouter()
 
@@ -29,7 +31,7 @@ def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
     return crud.create_user(db, user)
 
 
-# ========================
+# ===================================
 # Login JSON compatible frontend
 # ========================
 @router.post("/login", response_model=schemas.Token)
@@ -49,14 +51,22 @@ def login(user: schemas.UserLogin, db: Session = Depends(get_db)):
         "token_type": "bearer"
     }
 
-
+# ========================
 # Delete user
 # ========================
 @router.delete("/users/{user_id}")
-def delete_user(user_id: int, db: Session = Depends(get_db)):
+def delete_user(
+    user_id: int,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+):
     """
-    Supprimer un utilisateur par ID
+    Supprimer un utilisateur (admin seulement)
     """
+
+    if current_user["role"] != "admin":
+        raise HTTPException(status_code=403, detail="Accès refusé")
+
     user = db.query(User).filter(User.id == user_id).first()
 
     if not user:
@@ -66,3 +76,30 @@ def delete_user(user_id: int, db: Session = Depends(get_db)):
     db.commit()
 
     return {"message": "User supprimé avec succès"}
+
+# ==============================================
+# GET /users - Liste de tous les utilisateurs
+# ========================
+@router.get("/users", response_model=List[schemas.UserResponse])
+def list_users(
+    db: Session = Depends(get_db),
+    current_user: schemas.UserResponse = Depends(get_current_user)
+):
+    """
+    Retourne la liste de tous les utilisateurs.
+    Accessible uniquement aux admins.
+    """
+    if current_user.role != "admin":
+        raise HTTPException(status_code=403, detail="Accès refusé, administrateur requis")
+    return crud.get_users(db)
+
+
+# ==============================================
+# GET /me - Profil de l'utilisateur connecté
+# ========================
+@router.get("/me", response_model=schemas.UserResponse)
+def get_me(current_user: schemas.UserResponse = Depends(get_current_user)):
+    """
+    Retourne le profil de l'utilisateur connecté.
+    """
+    return current_user

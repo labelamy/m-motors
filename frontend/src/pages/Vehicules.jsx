@@ -90,11 +90,11 @@ function Vehicules() {
               {/* Image */}
               {v.image_url && (
                 <img
-                  src={`http://localhost:8000${v.image_url}`}
+                  src={`${import.meta.env.VITE_API_URL}${v.image_url}`}
                   alt={v.model}
                   className="card-img-top img-fluid"
                   style={{ height: "220px", objectFit: "cover" }}
-                  onError={(e) => {e.target.src = "http://localhost:8000/images/default_car.jpg";
+                  onError={(e) => {e.target.src = `${import.meta.env.VITE_API_URL}/images/default_car.jpg`;
                     e.target.onerror = null; // Empêche la boucle infinie si l'image par défaut est aussi introuvable
  }}
                 />
