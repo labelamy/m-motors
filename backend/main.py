@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse
 from sqlalchemy import text
 from database import engine
 import models
-from routers import vehicule, user, dossiers
+from routers import vehicule, user, dossiers ,auth
 from logging_config import logger
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
@@ -57,6 +57,7 @@ except Exception as e:
 app.include_router(vehicule.router, prefix="/vehicules", tags=["Vehicules"])
 app.include_router(user.router, prefix="/auth", tags=["Auth"])
 app.include_router(dossiers.router)
+app.include_router(auth.router)
 # app.include_router(auth.router)  # décommente si nécessaire
 
 @app.get("/")
