@@ -4,6 +4,7 @@ from database import SessionLocal
 import crud 
 import schemas 
 from auth import create_access_token
+from models import User
 
 router = APIRouter()
 
@@ -47,3 +48,21 @@ def login(user: schemas.UserLogin, db: Session = Depends(get_db)):
         "access_token": access_token,
         "token_type": "bearer"
     }
+
+
+# Delete user
+# ========================
+@router.delete("/users/{user_id}")
+def delete_user(user_id: int, db: Session = Depends(get_db)):
+    """
+    Supprimer un utilisateur par ID
+    """
+    user = db.query(User).filter(User.id == user_id).first()
+
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    db.delete(user)
+    db.commit()
+
+    return {"message": "User supprimé avec succès"}
