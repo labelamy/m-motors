@@ -5,7 +5,7 @@ import crud
 import schemas 
 from auth import get_current_admin
 
-router = APIRouter()
+router = APIRouter(prefix="/vehicules", tags=["Vehicules"])
 
 def get_db():
     db = SessionLocal()

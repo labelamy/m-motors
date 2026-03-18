@@ -10,7 +10,7 @@ from auth import create_access_token
 
 router = APIRouter(
     prefix="/auth",
-    tags=["auth"]
+    tags=["Auth"]
 )
 
 # REGISTER

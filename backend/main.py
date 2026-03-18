@@ -54,8 +54,8 @@ except Exception as e:
 # -----------------------
 # Routes
 # -----------------------
-app.include_router(vehicule.router, prefix="/vehicules", tags=["Vehicules"])
-app.include_router(user.router, prefix="/auth", tags=["Auth"])
+app.include_router(vehicule.router)
+app.include_router(user.router)
 app.include_router(dossiers.router)
 app.include_router(auth.router)
 # app.include_router(auth.router)  # décommente si nécessaire
