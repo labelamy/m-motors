@@ -30,7 +30,7 @@ def create_user(db: Session, user: schemas.UserCreate):
         raise HTTPException(status_code=400, detail="Email déjà utilisé")
 
     hashed_pwd = hash_password(user.password)
-    db_user = models.User(email=user.email, password=hashed_pwd)
+    db_user = models.User(email=user.email, password=hashed_pwd, role=getattr(user, "role", "client"), name=getattr(user, "name", None))
     db.add(db_user)
     db.commit()
     db.refresh(db_user)

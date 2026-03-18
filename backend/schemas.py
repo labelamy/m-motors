@@ -37,7 +37,7 @@ class UserResponse(BaseModel):
     id: int
     email: EmailStr
     role: str
-
+    name: Optional[str] = None
     class Config:
         from_attributes = True
 

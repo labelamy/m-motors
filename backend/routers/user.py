@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from database import SessionLocal
 import crud 
@@ -8,7 +9,7 @@ from models import User
 from typing import List
 
 
-router = APIRouter()
+router = APIRouter(prefix="/users", tags=["Users"])
 
 # Gestion de la base de données
 def get_db():
@@ -31,8 +32,8 @@ def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
     return crud.create_user(db, user)
 
 
-# ===================================
-# Login JSON compatible frontend
+# =================================================
+# Login JSON compatible frontend et Login-swagger 
 # ========================
 @router.post("/login", response_model=schemas.Token)
 def login(user: schemas.UserLogin, db: Session = Depends(get_db)):
@@ -51,10 +52,24 @@ def login(user: schemas.UserLogin, db: Session = Depends(get_db)):
         "token_type": "bearer"
     }
 
+
+@router.post("/login-swagger")
+def login_swagger(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+    db_user = crud.authenticate_user(db, form_data.username, form_data.password)
+
+    if not db_user:
+        raise HTTPException(status_code=401, detail="Email ou mot de passe incorrect")
+
+    access_token = create_access_token({"sub": db_user.email, "role": db_user.role })
+    return {
+        "access_token": access_token,
+        "token_type": "bearer"
+    }
+
 # ========================
 # Delete user
 # ========================
-@router.delete("/users/{user_id}")
+@router.delete("/{user_id}")
 def delete_user(
     user_id: int,
     db: Session = Depends(get_db),
@@ -64,13 +79,13 @@ def delete_user(
     Supprimer un utilisateur (admin seulement)
     """
 
-    if current_user["role"] != "admin":
+    if current_user.role != "admin":
         raise HTTPException(status_code=403, detail="Accès refusé")
 
     user = db.query(User).filter(User.id == user_id).first()
 
     if not user:
-        raise HTTPException(status_code=404, detail="User not found")
+        raise HTTPException(status_code=404, detail="User non trouvé")
 
     db.delete(user)
     db.commit()
@@ -80,7 +95,7 @@ def delete_user(
 # ==============================================
 # GET /users - Liste de tous les utilisateurs
 # ========================
-@router.get("/users", response_model=List[schemas.UserResponse])
+@router.get("/", response_model=List[schemas.UserResponse])
 def list_users(
     db: Session = Depends(get_db),
     current_user: schemas.UserResponse = Depends(get_current_user)
