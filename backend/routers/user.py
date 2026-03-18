@@ -53,19 +53,6 @@ def login(user: schemas.UserLogin, db: Session = Depends(get_db)):
     }
 
 
-@router.post("/login-swagger")
-def login_swagger(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
-    db_user = crud.authenticate_user(db, form_data.username, form_data.password)
-
-    if not db_user:
-        raise HTTPException(status_code=401, detail="Email ou mot de passe incorrect")
-
-    access_token = create_access_token({"sub": db_user.email, "role": db_user.role })
-    return {
-        "access_token": access_token,
-        "token_type": "bearer"
-    }
-
 # ========================
 # Delete user
 # ========================
