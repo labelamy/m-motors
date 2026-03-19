@@ -90,13 +90,14 @@ function Vehicules() {
               {/* Image */}
               {v.image_url && (
                 <img
-                  src={`${import.meta.env.VITE_API_URL}${v.image_url}`}
+                  src={v.image_url.startsWith("http") ? v.image_url : `${import.meta.env.VITE_API_URL}${v.image_url}`}
                   alt={v.model}
                   className="card-img-top img-fluid"
                   style={{ height: "220px", objectFit: "cover" }}
-                  onError={(e) => {e.target.src = `${import.meta.env.VITE_API_URL}/images/default_car.jpg`;
-                    e.target.onerror = null; // Empêche la boucle infinie si l'image par défaut est aussi introuvable
- }}
+                  onError={(e) => {
+                    e.target.src = `${import.meta.env.VITE_API_URL}/images/default_car.jpg`;
+                    e.target.onerror = null;
+                  }}
                 />
               )}
 
