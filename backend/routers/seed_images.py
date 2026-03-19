@@ -11,13 +11,16 @@ router = APIRouter()
 @router.get("/seed-images")
 def seed_images():
     db = SessionLocal()
-    BASE_DIR = Path(__file__).resolve().parent.parent  # remonte à backend/
+    BASE_DIR = Path(__file__).resolve().parent.parent  # backend/
     images_dir = BASE_DIR / "seed_images"
+
+    log = []
 
     for img_path in images_dir.glob("*.*"):
         filename = img_path.stem.lower()  # ex: audi_a3
         parts = filename.split("_")
         if len(parts) < 2:
+            log.append(f"Ignoré (nom invalide): {filename}")
             continue
         brand = parts[0].capitalize()
         model = parts[1].capitalize()
@@ -28,6 +31,12 @@ def seed_images():
         ).first()
 
         if not vehicule:
+            log.append(f"Aucun véhicule trouvé pour {brand} {model}")
+            continue
+
+        # Skip si déjà une URL Cloudinary
+        if vehicule.image_url and vehicule.image_url.startswith("http"):
+            log.append(f"{brand} {model} déjà migré")
             continue
 
         try:
@@ -37,8 +46,10 @@ def seed_images():
             )
             vehicule.image_url = result["secure_url"]
             db.commit()
+            log.append(f"✔️ {brand} {model} mis à jour")
         except Exception as e:
-            return {"error": f"Erreur pour {filename}: {str(e)}"}
+            log.append(f"Erreur pour {brand} {model}: {str(e)}")
+            db.rollback()  # Ne pas perdre la session si erreur
 
     db.close()
-    return {"status": "Migration Cloudinary terminée ✅"}
+    return {"status": "Migration Cloudinary terminée ✅", "log": log}

@@ -85,7 +85,7 @@ function Vehicules() {
           const imageSrc =
             v.image_url?.startsWith("http")
               ? v.image_url
-              : `${import.meta.env.VITE_API_URL}${v.image_url || "/images/default_car.jpg"}`;
+              : `${import.meta.env.VITE_API_URL}${v.image_url || "/seed_images/default_car.jpg"}`;
 
           return (
             <div key={v.id} className="col-12 col-md-6 col-lg-4">
@@ -96,7 +96,7 @@ function Vehicules() {
                   className="card-img-top img-fluid"
                   style={{ height: "220px", objectFit: "cover" }}
                   onError={(e) => {
-                    e.target.src = `${import.meta.env.VITE_API_URL}/images/default_car.jpg`;
+                    e.target.src = `${import.meta.env.VITE_API_URL}/seed_images/default_car.jpg`;
                     e.target.onerror = null;
                   }}
                 />
