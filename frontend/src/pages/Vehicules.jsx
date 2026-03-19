@@ -11,6 +11,8 @@ function Vehicules() {
 
   // Récupérer les dossiers de l'utilisateur
   const fetchDossiers = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) return; 
     try {
       const res = await API.get("/dossiers/mes-dossiers");
       setMesDossiers(res.data);
