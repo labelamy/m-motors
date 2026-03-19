@@ -1,23 +1,14 @@
+# update_images_cloudinary.py
 from dotenv import load_dotenv
 import os
 from pathlib import Path
-
-# Charger .env
-# Chemin explicite vers .env
-BASE_DIR = Path(__file__).resolve().parent
-env_path = BASE_DIR / ".env"
-load_dotenv(dotenv_path=env_path)
-
-print("DATABASE_URL =", os.getenv("DATABASE_URL"))
-
 import cloudinary
 import cloudinary.uploader
-from pathlib import Path
 from database import SessionLocal
 import models
 
-
-
+# Charger les variables d'environnement depuis .env
+load_dotenv()
 
 # Config Cloudinary
 cloudinary.config(
@@ -26,28 +17,26 @@ cloudinary.config(
     api_secret=os.getenv("CLOUDINARY_API_SECRET")
 )
 
-# Connexion DB
+# Connexion à la DB
 db = SessionLocal()
 
-# Dossier images
+# Dossier contenant les images à migrer
 BASE_DIR = Path(__file__).resolve().parent
 images_dir = BASE_DIR / "seed_images"
 
-# Parcours des images
 for img_path in images_dir.glob("*.*"):
     try:
-        filename = img_path.stem.lower()  # ex: mini_cooper
-
+        filename = img_path.stem.lower()  # ex: audi_a3
         print(f"Traitement: {filename}")
 
         # On suppose format: brand_model.jpg
         parts = filename.split("_")
         if len(parts) < 2:
-            print(f"Nom ignoré: {filename}")
+            print(f"Nom ignoré (format invalide) : {filename}")
             continue
 
         brand = parts[0].capitalize()
-        model = parts[1].capitalize()
+        model = "_".join(parts[1:]).capitalize()  # supporte des noms composés
 
         # Cherche véhicule en DB
         vehicule = db.query(models.Vehicule).filter(
@@ -59,22 +48,22 @@ for img_path in images_dir.glob("*.*"):
             print(f"Aucun véhicule trouvé pour {brand} {model}")
             continue
 
-        # Upload Cloudinary
+        # Upload sur Cloudinary
         result = cloudinary.uploader.upload(
             str(img_path),
-            folder="vehicules_migration"
+            folder="vehicules_migration",
+            overwrite=True,
+            resource_type="image"
         )
 
-        image_url = result["secure_url"]
-
-        # Mise à jour DB
-        vehicule.image_url = image_url
+        # Mettre à jour le véhicule avec l'URL publique
+        vehicule.image_url = result["secure_url"]
         db.commit()
 
-        print(f"✔️ {brand} {model} mis à jour")
+        print(f"✔️ {brand} {model} mis à jour → {result['secure_url']}")
 
     except Exception as e:
-        print(f"Erreur: {e}")
+        print(f"Erreur pour {filename}: {e}")
 
 db.close()
-print("✅ Migration terminée !")
+print("✅ Migration Cloudinary terminée !")
