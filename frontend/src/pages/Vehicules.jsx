@@ -6,13 +6,12 @@ function Vehicules() {
   const [vehicules, setVehicules] = useState([]);
   const [loading, setLoading] = useState(true);
   const [mesDossiers, setMesDossiers] = useState([]);
-
   const navigate = useNavigate();
 
-  // Récupérer les dossiers de l'utilisateur
+  const DEFAULT_IMAGE = "/seed_images/default_car.jpg"; // image par défaut dans public/seed_images
+
+  // Récupère les dossiers de l'utilisateur
   const fetchDossiers = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) return; 
     try {
       const res = await API.get("/dossiers/mes-dossiers");
       setMesDossiers(res.data);
@@ -28,21 +27,16 @@ function Vehicules() {
         vehicule_id: vehiculeId,
         type: "achat",
       });
-
       alert("Véhicule choisi ✅");
       await fetchDossiers();
       navigate("/dossiers");
     } catch (error) {
       console.error("Erreur création dossier", error);
-      if (error.response && error.response.data?.detail) {
-        alert(error.response.data.detail);
-      } else {
-        alert("Erreur inconnue ❌");
-      }
+      alert(error.response?.data?.detail || "Erreur inconnue ❌");
     }
   };
 
-  // Récupérer les véhicules
+  // Récupère les véhicules
   const fetchVehicules = async () => {
     try {
       const res = await API.get("/vehicules/");
@@ -82,12 +76,11 @@ function Vehicules() {
         )}
 
         {vehicules.map((v) => {
-          // Gestion des images :
-          
+          // Détecte si l'image est valide
           const imageSrc =
             v.image_url?.startsWith("http")
               ? v.image_url
-              : `${import.meta.env.VITE_API_URL}${v.image_url || "/seed_images/default_car.jpg"}`;
+              : `${import.meta.env.VITE_API_URL}${v.image_url || DEFAULT_IMAGE}`;
 
           return (
             <div key={v.id} className="col-12 col-md-6 col-lg-4">
@@ -98,7 +91,7 @@ function Vehicules() {
                   className="card-img-top img-fluid"
                   style={{ height: "220px", objectFit: "cover" }}
                   onError={(e) => {
-                    e.target.src = `${import.meta.env.VITE_API_URL}/seed_images/default_car.jpg`;
+                    e.target.src = DEFAULT_IMAGE; // fallback si erreur
                     e.target.onerror = null;
                   }}
                 />
