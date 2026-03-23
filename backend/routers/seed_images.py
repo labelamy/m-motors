@@ -9,11 +9,22 @@ import models
 router = APIRouter()
 
 def normalize_name(name: str) -> str:
-    """
-    Supprime espaces, underscore et majuscules pour comparaison
-    Ex : "X_3" ou "X3" -> "x3"
-    """
-    return name.replace(" ", "").replace("_", "").lower()
+    name = name.lower().replace(" ", "").replace("_", "").replace("-", "")
+
+    # corrections intelligentes
+    replacements = {
+        "class": "classe",
+        "c200": "cclass",
+        "c220": "cclass",
+        "c250": "cclass",
+        "cx5": "cx5",  
+    }
+
+    for key, value in replacements.items():
+        if key in name:
+            return value
+
+    return name
 
 @router.get("/seed-images")
 def seed_images():
@@ -43,8 +54,10 @@ def seed_images():
 
         vehicule = None
         for v in vehicules:
-            if normalize_name(v.model) == normalized_model_file:
+            if normalize_name(v.model) == normalized_model_file or normalize_name(v.model) in normalized_model_file or normalized_model_file in normalize_name(v.model):
                 vehicule = v
+                log.append(f"DEBUG: fichier={normalized_model_file}")
+                log.append(f"DEBUG: DB={normalize_name(v.model)}")
                 break
 
         if not vehicule:
