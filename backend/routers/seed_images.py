@@ -1,30 +1,27 @@
-# routers/seed_images.py
 from fastapi import APIRouter
 from pathlib import Path
 import cloudinary.uploader
-import os
 from database import SessionLocal
 import models
 
 router = APIRouter()
 
+
 def normalize_name(name: str) -> str:
     name = name.lower().replace(" ", "").replace("_", "").replace("-", "")
 
-    # corrections intelligentes
-    replacements = {
-        "class": "classe",
-        "c200": "cclass",
-        "c220": "cclass",
-        "c250": "cclass",
-        "cx5": "cx5",  
-    }
+    # cas spécifiques (AVANT toute logique générale)
+    if any(x in name for x in ["cclass", "c200", "c220", "c250"]):
+        return "cclass"
 
-    for key, value in replacements.items():
-        if key in name:
-            return value
+    if any(x in name for x in ["classea", "aclass"]):
+        return "classea"
+
+    if "cx5" in name:
+        return "cx5"
 
     return name
+
 
 @router.get("/seed-images")
 def seed_images():
@@ -37,27 +34,29 @@ def seed_images():
     for img_path in images_dir.glob("*.*"):
         filename = img_path.stem.lower()
         parts = filename.split("_")
+
         if len(parts) < 2:
             log.append(f"Ignoré (nom invalide) : {filename}")
             continue
 
-        brand = parts[0].capitalize()
-        model_file = " ".join(parts[1:]).capitalize()  # ex: model 3
+        brand = parts[0]  # ❌ pas de capitalize
+        model_file = "".join(parts[1:])  # plus simple et fiable
 
-        # Normalized pour matcher DB
         normalized_model_file = normalize_name(model_file)
 
-        # Recherche dans la DB
         vehicules = db.query(models.Vehicule).filter(
             models.Vehicule.brand.ilike(brand)
         ).all()
 
         vehicule = None
+
         for v in vehicules:
-            if normalize_name(v.model) == normalized_model_file or normalize_name(v.model) in normalized_model_file or normalized_model_file in normalize_name(v.model):
+            db_model = normalize_name(v.model)
+
+            log.append(f"[TEST] file={normalized_model_file} | db={db_model}")
+
+            if db_model == normalized_model_file:
                 vehicule = v
-                log.append(f"DEBUG: fichier={normalized_model_file}")
-                log.append(f"DEBUG: DB={normalize_name(v.model)}")
                 break
 
         if not vehicule:
@@ -79,12 +78,19 @@ def seed_images():
                     {"fetch_format": "auto"}
                 ]
             )
+
             vehicule.image_url = result["secure_url"]
             db.commit()
-            log.append(f"✔️ {brand} {vehicule.model} mis à jour → {result['secure_url']}")
+
+            log.append(f"✔️ {brand} {vehicule.model} mis à jour")
+
         except Exception as e:
-            log.append(f"Erreur pour {brand} {vehicule.model}: {str(e)}")
             db.rollback()
+            log.append(f"❌ Erreur pour {brand} {model_file}: {str(e)}")
 
     db.close()
-    return {"status": "Migration Cloudinary terminée ✅", "log": log}
+
+    return {
+        "status": "Migration Cloudinary terminée ✅",
+        "log": log
+    }
