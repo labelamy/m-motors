@@ -80,7 +80,7 @@ function Vehicules() {
           const imageSrc =
             v.image_url?.startsWith("http")
               ? v.image_url
-              : `${import.meta.env.VITE_API_URL}${v.image_url || DEFAULT_IMAGE}`;
+              : v.image_url || DEFAULT_IMAGE;
 
           return (
             <div key={v.id} className="col-12 col-md-6 col-lg-4">

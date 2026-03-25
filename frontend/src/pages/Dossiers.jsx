@@ -5,13 +5,14 @@ function Dossiers() {
   const [dossiers, setDossiers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // 🔹 Charger les dossiers
+  const DEFAULT_IMAGE = "/seed_images/default_car.jpg";
+
   const fetchDossiers = async () => {
     try {
       const response = await API.get("/dossiers/mes-dossiers");
       setDossiers(response.data);
     } catch (error) {
-      console.error("Erreur récupération dossiers :", error);
+      console.error(error);
     } finally {
       setLoading(false);
     }
@@ -21,7 +22,6 @@ function Dossiers() {
     fetchDossiers();
   }, []);
 
-  // 🔹 Upload document
   const handleUpload = async (id, file) => {
     if (!file) return;
 
@@ -29,135 +29,94 @@ function Dossiers() {
     formData.append("file", file);
 
     try {
-      await API.post(`/dossiers/${id}/upload`, formData, {
-        headers: { "Content-Type": "multipart/form-data" }
-      });
-
-      alert("Document uploadé avec succès ✅");
+      await API.post(`/dossiers/${id}/upload`, formData);
       fetchDossiers();
-
     } catch (error) {
-      console.error("Erreur upload :", error);
-      alert("Erreur lors de l'upload ❌");
+      console.error(error);
     }
   };
 
   const getStatusBadge = (status) => {
     switch (status) {
       case "VALIDE":
-        return "badge bg-success";
+        return "bg-success";
       case "REFUSE":
-        return "badge bg-danger";
+        return "bg-danger";
       default:
-        return "badge bg-warning text-dark";
+        return "bg-warning text-dark";
     }
   };
 
   if (loading) {
-    return (
-      <div className="container mt-5 text-center">
-        <div className="spinner-border text-primary"></div>
-        <p className="mt-3">Chargement des dossiers...</p>
-      </div>
-    );
+    return <div className="text-center mt-5">Chargement...</div>;
   }
 
   return (
     <div className="container py-5">
+      <h2 className="fw-bold mb-4">📁 Mes Dossiers</h2>
 
-      <div className="d-flex justify-content-between align-items-center mb-4 flex-wrap">
-        <h2 className="fw-bold">📁 Mes Dossiers</h2>
-        <span className="text-muted">
-          {dossiers.length} dossier(s)
-        </span>
-      </div>
+      <div className="row g-4">
+        {dossiers.map((d) => (
+          <div key={d.id} className="col-md-6 col-lg-4">
 
-      {dossiers.length === 0 ? (
-        <div className="alert alert-info text-center shadow-sm">
-          Aucun dossier trouvé.
-        </div>
-      ) : (
-        <div className="row g-4">
-          {dossiers.map((d) => (
-            <div
-              key={d.id}
-              className="col-12 col-md-6 col-lg-4"
-            >
-              <div className="card h-100 shadow-sm border-0 dossier-card">
+            <div className="card dossier-card border-0 shadow-sm">
 
-                <div className="card-body d-flex flex-column">
+              {/* IMAGE + OVERLAY */}
+              <div className="image-container">
+                <img
+                  src={d.vehicule?.image_url || DEFAULT_IMAGE}
+                  alt={d.vehicule?.model}
+                  className="card-img-top"
+                  onError={(e) => (e.target.src = DEFAULT_IMAGE)}
+                />
 
-                  <h5 className="card-title fw-bold mb-3">
-                    📄 Dossier #{d.id}
-                  </h5>
-
-                  <p className="mb-1">
-                    <strong>Véhicule :</strong> {d.vehicule_id}
-                  </p>
-
-                  <p className="mb-2">
-                    <strong>Type :</strong> {d.type}
-                  </p>
-
-                  <p className="mb-3">
-                    <strong>Status :</strong>{" "}
-                    <span className={getStatusBadge(d.status)}>
-                      {d.status}
-                    </span>
-                  </p>
-
-                  {/* Upload autorisé seulement si EN_ATTENTE */}
-                  {d.status === "EN_ATTENTE" && (
-                    <div className="mt-auto">
-                      <label className="form-label">
-                        📎 Ajouter un document
-                      </label>
-
-                      <input
-                        type="file"
-                        className="form-control"
-                        onChange={(e) =>
-                          handleUpload(d.id, e.target.files[0])
-                        }
-                      />
-                    </div>
-                  )}
-                  
-                  {/* Lien vers le document s'il existe */}
-                    {d.document_path && (
-                      <div className="mt-2">
-                        <a
-                          href={`http://localhost:8000${d.document_path}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn btn-outline-secondary btn-sm"
-                        >
-                          📄 Voir document
-                        </a>
-                      </div>
-                    )}
-
-                  {/* Message validé */}
-                  {d.status === "VALIDE" && (
-                    <div className="alert alert-success mt-auto">
-                      ✅ Dossier validé par l'administrateur
-                    </div>
-                  )}
-
-                  {/* Message refusé */}
-                  {d.status === "REFUSE" && (
-                    <div className="alert alert-danger mt-auto">
-                      ❌ Dossier refusé par l'administrateur
-                    </div>
-                  )}
-
+                <div className="overlay">
+                  <span className={`badge ${getStatusBadge(d.status)}`}>
+                    {d.status}
+                  </span>
                 </div>
+              </div>
+
+              {/* CONTENU */}
+              <div className="card-body">
+
+                <h5 className="fw-bold">
+                  {d.vehicule
+                    ? `${d.vehicule.brand} ${d.vehicule.model}`
+                    : "Véhicule"}
+                </h5>
+
+                <p className="text-muted mb-2">
+                  Type : {d.type}
+                </p>
+
+                {d.status === "EN_ATTENTE" && (
+                  <input
+                    type="file"
+                    className="form-control mt-2"
+                    onChange={(e) =>
+                      handleUpload(d.id, e.target.files[0])
+                    }
+                  />
+                )}
+
+                {d.document_path && (
+                  <a
+                    href={`http://localhost:8000${d.document_path}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn btn-sm btn-outline-dark mt-2"
+                  >
+                    📄 Voir document
+                  </a>
+                )}
 
               </div>
             </div>
-          ))}
-        </div>
-      )}
+
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

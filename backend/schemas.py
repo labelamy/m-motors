@@ -6,7 +6,7 @@ class VehiculeBase(BaseModel):
     brand: str
     model: str
     price: float
-    type: str  # achat ou location
+    type: str  
     year: Optional[int] = None
     kilometrage: Optional[int] = None
     carburant: Optional[str] = None
@@ -55,6 +55,8 @@ class DossierResponse(BaseModel):
     vehicule_id: int
     type: str
     status: str
+
+    vehicule: VehiculeResponse
 
     class Config:
         from_attributes = True
