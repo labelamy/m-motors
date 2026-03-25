@@ -9,6 +9,7 @@ import AdminRoute from "./components/AdminRoute";
 import Dossiers from "./pages/Dossiers";
 import AdminDashboard from "./pages/AdminDashboard";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'; 
+import VehiculeDetail from "./pages/VehiculeDetail";
 
 import "./App.css";
 
@@ -34,6 +35,7 @@ function App() {
                 </PrivateRoute>
               }
             />
+            <Route path="/vehicules/:id" element={<VehiculeDetail />} />
             <Route
               path="/dossiers"
               element={

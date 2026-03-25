@@ -6,11 +6,17 @@ function Vehicules() {
   const [vehicules, setVehicules] = useState([]);
   const [loading, setLoading] = useState(true);
   const [mesDossiers, setMesDossiers] = useState([]);
+  const [filters, setFilters] = useState({
+    type: "",
+    carburant: "",
+    maxPrice: ""
+  });
+
   const navigate = useNavigate();
 
-  const DEFAULT_IMAGE = "/seed_images/default_car.jpg"; // image par défaut dans public/seed_images
+  const DEFAULT_IMAGE = "/seed_images/default_car.jpg";
 
-  // Récupère les dossiers de l'utilisateur
+  // 🔹 Récupérer dossiers
   const fetchDossiers = async () => {
     try {
       const res = await API.get("/dossiers/mes-dossiers");
@@ -20,10 +26,10 @@ function Vehicules() {
     }
   };
 
-  // Créer un dossier pour un véhicule choisi
+  // 🔹 Choisir véhicule
   const choisirVehicule = async (vehiculeId) => {
     try {
-      const res = await API.post("/dossiers/", {
+      await API.post("/dossiers/", {
         vehicule_id: vehiculeId,
         type: "achat",
       });
@@ -31,30 +37,39 @@ function Vehicules() {
       await fetchDossiers();
       navigate("/dossiers");
     } catch (error) {
-      console.error("Erreur création dossier", error);
-      alert(error.response?.data?.detail || "Erreur inconnue ❌");
+      console.error(error);
+      alert(error.response?.data?.detail || "Erreur ❌");
     }
   };
 
-  // Récupère les véhicules
+  // 🔹 Récupérer véhicules
   const fetchVehicules = async () => {
     try {
       const res = await API.get("/vehicules/");
       setVehicules(res.data);
     } catch (error) {
-      console.error("Erreur récupération véhicules :", error);
+      console.error(error);
     } finally {
       setLoading(false);
     }
   };
 
-  const vehiculeDejaChoisi = (vehiculeId) =>
-    mesDossiers.some((d) => d.vehicule_id === vehiculeId);
+  const vehiculeDejaChoisi = (id) =>
+    mesDossiers.some((d) => d.vehicule_id === id);
 
   useEffect(() => {
     fetchVehicules();
     fetchDossiers();
   }, []);
+
+  // 🔍 FILTRAGE
+  const filteredVehicules = vehicules.filter((v) => {
+    return (
+      (!filters.type || v.type.toLowerCase() === filters.type) &&
+      (!filters.carburant || v.carburant === filters.carburant) &&
+      (!filters.maxPrice || v.price <= filters.maxPrice)
+    );
+  });
 
   if (loading) {
     return (
@@ -68,15 +83,57 @@ function Vehicules() {
   return (
     <div className="container py-5">
       <h2 className="mb-4">🚗 Véhicules Disponibles</h2>
+
+      {/* 🔍 FILTRES */}
+      <div className="row mb-4">
+        <div className="col">
+          <select
+            className="form-select"
+            onChange={(e) =>
+              setFilters({ ...filters, type: e.target.value })
+            }
+          >
+            <option value="">Type</option>
+            <option value="achat">Achat</option>
+            <option value="location">Location</option>
+          </select>
+        </div>
+
+        <div className="col">
+          <select
+            className="form-select"
+            onChange={(e) =>
+              setFilters({ ...filters, carburant: e.target.value })
+            }
+          >
+            <option value="">Carburant</option>
+            <option>Essence</option>
+            <option>Diesel</option>
+            <option>Électrique</option>
+          </select>
+        </div>
+
+        <div className="col">
+          <input
+            type="number"
+            className="form-control"
+            placeholder="Prix max"
+            onChange={(e) =>
+              setFilters({ ...filters, maxPrice: e.target.value })
+            }
+          />
+        </div>
+      </div>
+
+      {/* 🚗 LISTE */}
       <div className="row g-4">
-        {vehicules.length === 0 && (
-          <div className="alert alert-info text-center shadow-sm">
-            Aucun véhicule disponible.
+        {filteredVehicules.length === 0 && (
+          <div className="alert alert-info text-center">
+            Aucun véhicule trouvé.
           </div>
         )}
 
-        {vehicules.map((v) => {
-          // Détecte si l'image est valide
+        {filteredVehicules.map((v) => {
           const imageSrc =
             v.image_url?.startsWith("http")
               ? v.image_url
@@ -84,61 +141,57 @@ function Vehicules() {
 
           return (
             <div key={v.id} className="col-12 col-md-6 col-lg-4">
-              <div className="card h-100 shadow-sm border-0">
+              
+              <div
+                className="card h-100 shadow-sm border-0"
+                style={{ cursor: "pointer" }}
+                onClick={() => navigate(`/vehicules/${v.id}`)}
+              >
                 <img
                   src={imageSrc}
                   alt={v.model}
-                  className="card-img-top img-fluid"
+                  className="card-img-top"
                   style={{ height: "220px", objectFit: "cover" }}
                   onError={(e) => {
-                    e.target.src = DEFAULT_IMAGE; // fallback si erreur
-                    e.target.onerror = null;
+                    e.target.src = DEFAULT_IMAGE;
                   }}
                 />
 
                 <div className="card-body d-flex flex-column">
-                  <h5 className="card-title fw-bold">
+                  <h5 className="fw-bold">
                     {v.brand} {v.model} ({v.year})
                   </h5>
 
-                  <p className="mb-1">
-                    <strong>Prix :</strong> {v.price.toLocaleString()} €
-                  </p>
-                  <p className="mb-1">
-                    <strong>Kilométrage :</strong> {v.kilometrage} km
-                  </p>
-                  <p className="mb-1">
-                    <strong>Carburant :</strong> {v.carburant}
-                  </p>
-                  <p className="mb-1">
-                    <strong>Transmission :</strong> {v.transmission}
-                  </p>
-                  <p className="mb-1">
-                    <strong>Type :</strong> {v.type}
-                  </p>
-                  <p className="mb-2">{v.description}</p>
+                  <p><strong>Prix :</strong> {v.price.toLocaleString()} €</p>
+                  <p><strong>Kilométrage :</strong> {v.kilometrage} km</p>
+                  <p><strong>Carburant :</strong> {v.carburant}</p>
+                  <p><strong>Transmission :</strong> {v.transmission}</p>
+                  <p><strong>Type :</strong> {v.type}</p>
 
-                  <div className="d-flex justify-content-between align-items-center mt-4">
-                    <span
-                      className={`badge badge-status ${
-                        v.available ? "bg-success" : "bg-danger"
-                      }`}
-                    >
+                  <div className="mt-auto d-flex justify-content-between align-items-center">
+                    <span className={`badge ${v.available ? "bg-success" : "bg-danger"}`}>
                       {v.available ? "Disponible" : "Indisponible"}
                     </span>
 
                     {v.available && (
                       <button
-                        className="btn btn-choose"
+                        className="btn btn-primary btn-sm"
                         disabled={vehiculeDejaChoisi(v.id)}
-                        onClick={() => choisirVehicule(v.id)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          choisirVehicule(v.id);
+                        }}
                       >
-                        {vehiculeDejaChoisi(v.id) ? "Déjà choisi" : "🚗 Choisir"}
+                        {vehiculeDejaChoisi(v.id)
+                          ? "Déjà choisi"
+                          : "Choisir"}
                       </button>
                     )}
                   </div>
                 </div>
+
               </div>
+
             </div>
           );
         })}
