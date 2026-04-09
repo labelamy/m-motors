@@ -206,3 +206,5 @@ def seed_db():
         return JSONResponse({"error": str(e)}, status_code=500)
     finally:
         db.close()
+        
+app.include_router(seed_router)
