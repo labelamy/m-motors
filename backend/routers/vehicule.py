@@ -93,3 +93,12 @@ def migrate_vehicules(db: Session = Depends(get_db)):
         render_db.close()
 
     return {"message": f"{count} véhicules migrés avec succès ✅"}
+
+@router.get("/{vehicule_id}", response_model=schemas.VehiculeResponse)
+def get_one(vehicule_id: int, db: Session = Depends(get_db)):
+    vehicule = db.query(models.Vehicule).filter(models.Vehicule.id == vehicule_id).first()
+
+    if not vehicule:
+        raise HTTPException(status_code=404, detail="Véhicule non trouvé")
+
+    return vehicule
