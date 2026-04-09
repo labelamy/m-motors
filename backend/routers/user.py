@@ -117,7 +117,7 @@ def migrate_users(db: Session = Depends(get_db)):
             id=u.id,
             name=u.name,
             email=u.email,
-            password=u.password,  # hash existant
+            password=u.password,  
             role=u.role,
             created_at=u.created_at
         )
@@ -127,3 +127,34 @@ def migrate_users(db: Session = Depends(get_db)):
     db.commit()
     render_session.close()
     return {"message": f"{count} utilisateurs migrés avec succès ✅"}
+
+# Créer des utilisateurs de test
+
+@router.post("/create-test-users")
+def create_test_users(db: Session = Depends(get_db)):
+    users_data = [
+        {"name": "Admin", "email": "admin@test.com", "password": "1234", "role": "admin"},
+        {"name": "Client1", "email": "client1@test.com", "password": "1234", "role": "client"},
+        {"name": "Client2", "email": "client2@test.com", "password": "1234", "role": "client"},
+    ]
+
+    created = 0
+
+    for u in users_data:
+        # Vérifie si l'utilisateur existe déjà
+        exists = db.query(models.User).filter(models.User.email == u["email"]).first()
+        if exists:
+            continue
+
+        new_user = models.User(
+            name=u["name"],
+            email=u["email"],
+            password=pwd_context.hash(u["password"]),
+            role=u["role"]
+        )
+
+        db.add(new_user)
+        created += 1
+
+    db.commit()
+    return {"message": f"{created} users créés ✅"}
