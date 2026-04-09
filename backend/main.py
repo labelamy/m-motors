@@ -123,6 +123,17 @@ def seed_db():
         models_list = ["A", "B", "C", "X", "Y"]
         carburants = ["Essence", "Diesel", "Electrique", "Hybride"]
         transmissions = ["Manuelle", "Automatique"]
+        vehicule_images = {
+            ("Lexus", "A"): "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775744091/lexus_a_qmh8vk.jpg",
+            ("Lamborghini", "Y"): "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775744072/lamborghini_y_nthb7w.jpg",
+            ("Citroen", "B"): "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775743951/citroen_b_nbaiwd.jpg",
+            ("Citroen", "C"): "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775743969/citroen_c_uyc1qk.jpg",
+            ("Lamborghini", "A"): "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775744057/lamborghini_a_qh3h7p.jpg",
+            ("Ferrari", "C"): "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775743765/ferrari_c_m0s3cz.jpg",
+            ("Porsche", "X"): "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775744131/porsche_x_a6v1fk.jpg",
+            ("Ferrari", "Y"): "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775744013/ferrari_y_njiltt.jpg",
+            ("Gmc", "Y"): "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775744036/gmc_y_somm23.jpg",
+        }
         images_sample = [
             "https://res.cloudinary.com/demo/image/upload/sample.jpg",
             "https://res.cloudinary.com/demo/image/upload/sample.jpg"
@@ -152,7 +163,7 @@ def seed_db():
                 transmission=random.choice(transmissions),
                 type=random.choice(["achat", "location"]),
                 description=f"Description du véhicule {i+1}",
-                image_url=random.choice(images_sample),
+                image_url=vehicule_images.get((brands, models), "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775748900/default_car_cbffel.png"),
                 available=True
             )
             db.add(vehicule)
