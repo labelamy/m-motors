@@ -1,11 +1,11 @@
 import { Navigate } from "react-router-dom";
-import { getCurrentUser } from "../services/auth";
 
 function AdminRoute({ children }) {
-  const user = getCurrentUser();
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+
+  console.log("ADMIN USER:", user); // DEBUG
 
   if (!user || user.role !== "admin") {
-    // pas connecté ou pas admin → login
     return <Navigate to="/login" />;
   }
 
