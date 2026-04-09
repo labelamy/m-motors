@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { setCurrentUser } from "../services/auth";
 import API from "../services/api";
-import  { jwtDecode }  from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -16,29 +15,30 @@ function Login() {
     setLoading(true);
 
     try {
-      const response = await API.post("/auth/login",{
-            email: email,
-            password: password
-          });
+      // Appel à l'API pour se connecter
+      const response = await API.post("/users/login", {
+        email,
+        password
+      });
 
       const { access_token } = response.data;
 
-      // Décoder le token pour récupérer le payload
+      // Décodage du token
       const decoded = jwtDecode(access_token);
-      const userEmail = decoded.sub; // le "sub" contient l'email
 
-      // Ici, tu peux mettre un rôle par défaut ou récupérer depuis ton endpoint /auth/me
-      const userRole = decoded.role || "user"; //
-     
-      // Stockage du token et user
+      const userEmail = decoded.sub;
+      const userRole = decoded.role || "client";
+
+      // Stockage
       localStorage.setItem("token", access_token);
-      localStorage.setItem("currentUser", JSON.stringify({ email: userEmail, role: userRole }));
-      
-      
-      alert("Connexion réussie ✅");
+      localStorage.setItem(
+        "currentUser",
+        JSON.stringify({ email: userEmail, role: userRole })
+      );
 
-      // Redirection selon rôle
-       
+      console.log("Utilisateur :", decoded);
+
+      // Redirection en fonction du rôle
       if (userRole === "admin") {
         navigate("/admin");
       } else {
