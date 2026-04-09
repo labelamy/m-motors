@@ -119,60 +119,90 @@ seed_router = APIRouter()
 def seed_db():
     db: Session = SessionLocal()
     try:
-        brands = ["Lexus", "Maserati", "Mitsubishi", "Citroen", "Chrysler", "Lamborghini", "Ferrari", "Porsche", "Opel", "Gmc"]
-        models_list = ["A", "B", "C", "X", "Y"]
-        carburants = ["Essence", "Diesel", "Electrique", "Hybride"]
-        transmissions = ["Manuelle", "Automatique"]
-        vehicule_images = {
-            ("Lexus", "A"): "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775744091/lexus_a_qmh8vk.jpg",
-            ("Lamborghini", "Y"): "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775744072/lamborghini_y_nthb7w.jpg",
-            ("Citroen", "B"): "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775743951/citroen_b_nbaiwd.jpg",
-            ("Citroen", "C"): "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775743969/citroen_c_uyc1qk.jpg",
-            ("Lamborghini", "A"): "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775744057/lamborghini_a_qh3h7p.jpg",
-            ("Ferrari", "C"): "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775743765/ferrari_c_m0s3cz.jpg",
-            ("Porsche", "X"): "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775744131/porsche_x_a6v1fk.jpg",
-            ("Ferrari", "Y"): "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775744013/ferrari_y_njiltt.jpg",
-            ("Gmc", "Y"): "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775744036/gmc_y_somm23.jpg",
-        }
-        images_sample = [
-            "https://res.cloudinary.com/demo/image/upload/sample.jpg",
-            "https://res.cloudinary.com/demo/image/upload/sample.jpg"
+        # -------------------------------
+        # Liste de véhicules FIXES avec leurs images Cloudinary
+        # -------------------------------
+        vehicules_data = [
+            {
+                "brand": "Lexus",
+                "model": "A",
+                "image_url": "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775744091/lexus_a_qmh8vk.jpg"
+            },
+            {
+                "brand": "Lamborghini",
+                "model": "Y",
+                "image_url": "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775744072/lamborghini_y_nthb7w.jpg"
+            },
+            {
+                "brand": "Citroen",
+                "model": "B",
+                "image_url": "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775743951/citroen_b_nbaiwd.jpg"
+            },
+            {
+                "brand": "Citroen",
+                "model": "C",
+                "image_url": "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775743969/citroen_c_uyc1qk.jpg"
+            },
+            {
+                "brand": "Lamborghini",
+                "model": "A",
+                "image_url": "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775744057/lamborghini_a_qh3h7p.jpg"
+            },
+            {
+                "brand": "Ferrari",
+                "model": "C",
+                "image_url": "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775743765/ferrari_c_m0s3cz.jpg"
+            },
+            {
+                "brand": "Porsche",
+                "model": "X",
+                "image_url": "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775744131/porsche_x_a6v1fk.jpg"
+            },
+            {
+                "brand": "Ferrari",
+                "model": "Y",
+                "image_url": "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775744013/ferrari_y_njiltt.jpg"
+            },
+            {
+                "brand": "Gmc",
+                "model": "Y",
+                "image_url": "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775744036/gmc_y_somm23.jpg"
+            }
         ]
 
-        # Supprime les véhicules existants
+        carburants = ["Essence", "Diesel", "Electrique", "Hybride"]
+        transmissions = ["Manuelle", "Automatique"]
+
+        # -------------------------------
+        # Reset DB
+        # -------------------------------
         db.query(models.Vehicule).delete()
         db.commit()
 
-        # Chemin vers les images locales de test
-        BASE_DIR = Path(__file__).resolve().parent
-        images_dir = BASE_DIR / "seed_images"
-        images_paths = list(images_dir.glob("*.jpg"))
-
-        if not images_paths:
-            return {"error": "Aucune image trouvée dans seed_images !"}
-
-        # Crée 10 véhicules de test
-        for i in range(10):
+        # -------------------------------
+        # Création véhicules
+        # -------------------------------
+        for i, v in enumerate(vehicules_data):
             vehicule = models.Vehicule(
-                brand=random.choice(brands),
-                model=random.choice(models_list),
-                year=random.randint(2015, 2023),
-                price=round(random.uniform(10000, 50000), 2),
-                kilometrage=random.randint(0, 150000),
+                brand=v["brand"],
+                model=v["model"],
+                year=random.randint(2018, 2023),
+                price=round(random.uniform(15000, 80000), 2),
+                kilometrage=random.randint(0, 120000),
                 carburant=random.choice(carburants),
                 transmission=random.choice(transmissions),
                 type=random.choice(["achat", "location"]),
-                description=f"Description du véhicule {i+1}",
-                image_url=vehicule_images.get((brands, models), "https://res.cloudinary.com/dwb8kogm4/image/upload/v1775748900/default_car_cbffel.png"),
+                description=f"{v['brand']} {v['model']} - Véhicule premium",
+                image_url=v["image_url"],  # ✅ IMAGE CORRECTE
                 available=True
             )
             db.add(vehicule)
+
         db.commit()
-        return {"message": "DB remplie avec succès !"}
+        return {"message": "DB remplie avec véhicules + images Cloudinary ✅"}
+
     except Exception as e:
         db.rollback()
         return JSONResponse({"error": str(e)}, status_code=500)
     finally:
         db.close()
-
-app.include_router(seed_router)
