@@ -26,7 +26,8 @@ class VehiculeResponse(VehiculeBase):
         from_attributes = True
         
 class UserCreate(BaseModel):
-    email: EmailStr
+    name: Optional[str] = None
+    email: str
     password: str
 
 class UserLogin(BaseModel):

@@ -50,7 +50,7 @@ def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
     try:
         hashed_password = pwd_context.hash(user.password)
         db_user = models.User(
-            name=user.name,
+            name=user.name or user.email.split("@")[0],
             email=user.email,
             password=hashed_password,
             role="client"
