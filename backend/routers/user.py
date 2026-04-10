@@ -47,17 +47,22 @@ def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
     Crée un nouvel utilisateur.
     Hash automatiquement le mot de passe avec bcrypt.
     """
-    hashed_password = pwd_context.hash(user.password)
-    db_user = models.User(
-        name=user.name,
-        email=user.email,
-        password=hashed_password,
-        role="client"
-    )
-    db.add(db_user)
-    db.commit()
-    db.refresh(db_user)
-    return db_user
+    try:
+        hashed_password = pwd_context.hash(user.password)
+        db_user = models.User(
+            name=user.name,
+            email=user.email,
+            password=hashed_password,
+            role="client"
+        )
+        db.add(db_user)
+        db.commit()
+        db.refresh(db_user)
+        return db_user
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))
 
 # -----------------------
 # Liste des utilisateurs (admin uniquement)
