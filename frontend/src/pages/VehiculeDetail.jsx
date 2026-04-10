@@ -31,6 +31,7 @@ function VehiculeDetail() {
   };
 
   useEffect(() => {
+    console.log("ID URL:", id);
     fetchVehicule();
   }, [id]);
 
