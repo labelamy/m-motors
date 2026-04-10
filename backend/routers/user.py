@@ -65,6 +65,40 @@ def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=500, detail=str(e))
 
 # -----------------------
+# Création d'un utilisateur par un admin
+# -----------------------
+@router.post("/admin/create-user", response_model=schemas.UserResponse)
+def create_user_admin(
+    user: schemas.AdminUserCreate,
+    db: Session = Depends(get_db),
+    current_user: schemas.UserResponse = Depends(get_current_user)
+):
+    # 🔒 Vérification admin
+    if current_user.role != "admin":
+        raise HTTPException(status_code=403, detail="Accès refusé")
+
+    # 🔴 Vérifier si email existe déjà
+    existing_user = db.query(models.User).filter(models.User.email == user.email).first()
+    if existing_user:
+        raise HTTPException(status_code=400, detail="Email déjà utilisé")
+
+    # 🔐 Hash password
+    hashed_password = pwd_context.hash(user.password)
+
+    # ✅ Création user avec rôle choisi
+    db_user = models.User(
+        name=user.name or user.email.split("@")[0],
+        email=user.email,
+        password=hashed_password,
+        role=user.role
+    )
+
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+
+    return db_user
+# -----------------------
 # Liste des utilisateurs (admin uniquement)
 # -----------------------
 @router.get("/", response_model=List[schemas.UserResponse])

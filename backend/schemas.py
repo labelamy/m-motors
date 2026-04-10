@@ -34,6 +34,12 @@ class UserLogin(BaseModel):
     email: EmailStr
     password: str
 
+class AdminUserCreate(BaseModel):
+    name: Optional[str] = None
+    email: str
+    password: str
+    role: str  # admin ou client
+
 class UserResponse(BaseModel):
     id: int
     email: EmailStr
