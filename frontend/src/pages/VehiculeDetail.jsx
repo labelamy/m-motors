@@ -15,6 +15,8 @@ function VehiculeDetail() {
   // 🔹 Récupérer détail véhicule
   const fetchVehicule = async () => {
     try {
+      console.log("ID envoyé API =", id);
+
       const res = await API.get(`/vehicules/${id}`);
       setVehicule(res.data);
 
@@ -22,7 +24,9 @@ function VehiculeDetail() {
       const favRes = await API.get("/favoris");
       setIsFavori(favRes.data.some(f => f.vehicule_id === res.data.id));
     } catch (error) {
-      console.error(error);
+      console.log("ERROR STATUS =", error.response?.status);
+      console.log("ERROR DATA =", error.response?.data);
+      console.log("ERROR FULL =", error);
       alert("Erreur récupération véhicule ❌");
       navigate("/vehicules");
     } finally {
