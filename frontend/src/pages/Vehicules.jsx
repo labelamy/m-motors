@@ -167,10 +167,11 @@ function Vehicules() {
                   <p><strong>Carburant :</strong> {v.carburant}</p>
                   <p><strong>Transmission :</strong> {v.transmission}</p>
                   <p><strong>Type :</strong> {v.type}</p>
+                  <p><strong>Description :</strong> {v.description}</p>
 
                   <div className="mt-auto d-flex justify-content-between align-items-center">
-                    <span className={`badge ${v.available ? "bg-success" : "bg-danger"}`}>
-                      {v.available ? "Disponible" : "Indisponible"}
+                    <span className={`badge ${isIndisponible ? "bg-danger" : "bg-success"}`}>
+                      {isIndisponible ? "Indisponible" : "Disponible"}
                     </span>
 
                     {v.available && (

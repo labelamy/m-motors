@@ -61,6 +61,8 @@ function VehiculeDetail() {
 
   if (!vehicule) return null;
 
+  const isIndisponible = !vehicule.available || vehiculeDejaChoisi(vehicule.id);
+
   const toggleFavori = async () => {
     try {
       if (isFavori) {
@@ -110,7 +112,7 @@ function VehiculeDetail() {
           <p><strong>Carburant :</strong> {vehicule.carburant}</p>
           <p><strong>Transmission :</strong> {vehicule.transmission}</p>
           <p><strong>Type :</strong> {vehicule.type}</p>
-          <p>{vehicule.description}</p>
+          <p><strong>Description :</strong> {vehicule.description}</p>
 
           <div className="mt-auto d-flex justify-content-between align-items-center">
             <button
@@ -120,9 +122,9 @@ function VehiculeDetail() {
               {isFavori ? "❤️ Favori" : "🤍 Ajouter aux favoris"}
             </button>
 
-            {vehicule.available && (
-              <button className="btn btn-primary px-4 fw-semibold" onClick={choisirVehicule}>
-                🚗 Choisir ce véhicule
+            {!isIndisponible && (
+              <button className="btn btn-primary px-4 fw-semibold" disabled={isIndisponible} onClick={choisirVehicule}>
+                {isIndisponible ? "Indisponible" : "🚗 Choisir ce véhicule"}
               </button>
             )}
           </div>
