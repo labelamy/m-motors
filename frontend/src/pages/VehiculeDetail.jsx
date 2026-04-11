@@ -41,13 +41,23 @@ function VehiculeDetail() {
   }, [id]);
 
   if (loading) {
-    return (
-      <div className="container text-center mt-5">
-        <div className="spinner-border text-primary"></div>
-        <p className="mt-3">Chargement du véhicule...</p>
+  return (
+    <div className="container py-5 fade-in">
+      <div className="row g-4">
+        <div className="col-md-6">
+          <div className="skeleton image"></div>
+        </div>
+        <div className="col-md-6">
+          <div className="skeleton title"></div>
+          <div className="skeleton text"></div>
+          <div className="skeleton text"></div>
+          <div className="skeleton text"></div>
+        </div>
       </div>
-    );
-  }
+      <p className="mt-3">Chargement du véhicule...</p>
+    </div>
+  );
+}
 
   if (!vehicule) return null;
 
