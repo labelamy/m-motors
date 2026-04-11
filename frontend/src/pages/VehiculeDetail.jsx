@@ -24,12 +24,12 @@ function VehiculeDetail() {
     return;
   }
 
-  //  appel séparé (
+  // appel séparé pour vérifier favoris (non bloquant)
   try {
     const favRes = await API.get("/favoris");
     setIsFavori(favRes.data.some(f => f.vehicule_id === Number(id)));
   } catch (error) {
-    console.log("Erreur favoris (non bloquant) :", error);
+    console.log("Erreur favoris :", error);
   } finally {
     setLoading(false);
   }
