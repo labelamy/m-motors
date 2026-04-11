@@ -61,7 +61,7 @@ function VehiculeDetail() {
 
   if (!vehicule) return null;
 
-  const isIndisponible = !vehicule.available || vehiculeDejaChoisi(vehicule.id);
+  const isIndisponible = !vehicule.available; 
 
   const toggleFavori = async () => {
     try {
@@ -113,8 +113,12 @@ function VehiculeDetail() {
           <p><strong>Transmission :</strong> {vehicule.transmission}</p>
           <p><strong>Type :</strong> {vehicule.type}</p>
           <p><strong>Description :</strong> {vehicule.description}</p>
+          
+            <span className={`badge ${isIndisponible ? "bg-danger" : "bg-success"} mb-2`}>
+              {isIndisponible ? "Indisponible" : "Disponible"}
+            </span>
 
-          <div className="mt-auto d-flex justify-content-between align-items-center">
+          <div className="mt-auto d-flex justify-content-between align-items-center gap-2">
             <button
               className={`btn ${isFavori ? "btn-danger" : "btn-outline-danger"}`}
               onClick={toggleFavori}
@@ -122,11 +126,12 @@ function VehiculeDetail() {
               {isFavori ? "❤️ Favori" : "🤍 Ajouter aux favoris"}
             </button>
 
-            {!isIndisponible && (
-              <button className="btn btn-primary px-4 fw-semibold" disabled={isIndisponible} onClick={choisirVehicule}>
-                {isIndisponible ? "Indisponible" : "🚗 Choisir ce véhicule"}
-              </button>
-            )}
+             <button
+              className={`btn ${isIndisponible ? "btn-secondary" : "btn-primary"} px-4 fw-semibold`}
+              disabled={isIndisponible}
+              onClick={choisirVehicule}>
+              {isIndisponible ? "Indisponible" : "🚗 Choisir ce véhicule"}
+            </button>
           </div>
         </div>
       </div>

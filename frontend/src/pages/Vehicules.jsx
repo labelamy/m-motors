@@ -139,6 +139,8 @@ function Vehicules() {
               ? v.image_url
               : v.image_url || DEFAULT_IMAGE;
 
+        const isIndisponible = vehiculeDejaChoisi(v.id);      
+
           return (
             <div key={v.id} className="col-12 col-md-6 col-lg-4">
               
@@ -169,25 +171,25 @@ function Vehicules() {
                   <p><strong>Type :</strong> {v.type}</p>
                   <p><strong>Description :</strong> {v.description}</p>
 
-                  <div className="mt-auto d-flex justify-content-between align-items-center">
-                    <span className={`badge ${isIndisponible ? "bg-danger" : "bg-success"}`}>
-                      {isIndisponible ? "Indisponible" : "Disponible"}
-                    </span>
+                  <div className="mt-auto d-flex justify-content-between align-items-center gap-2">
 
-                    {v.available && (
-                      <button
-                        className="btn btn-primary btn-sm"
-                        disabled={vehiculeDejaChoisi(v.id)}
+                  <span className={`badge ${isIndisponible ? "bg-danger" : "bg-success"}`}>
+                    {isIndisponible ? "Indisponible" : "Disponible"}
+                  </span>
+
+                    <button
+                      className={`btn btn-sm ${
+                        isIndisponible ? "btn-secondary" : "btn-primary"}`}
+                        disabled={isIndisponible}
                         onClick={(e) => {
-                          e.stopPropagation();
-                          choisirVehicule(v.id);
-                        }}
-                      >
+                        e.stopPropagation();
+                        choisirVehicule(v.id);}}>
                         {vehiculeDejaChoisi(v.id)
-                          ? "Déjà choisi"
-                          : "Choisir"}
-                      </button>
-                    )}
+                        ? "Déjà choisi"
+                        : isIndisponible
+                        ? "Indisponible"
+                        : "Choisir"}
+                    </button>
                   </div>
                 </div>
 

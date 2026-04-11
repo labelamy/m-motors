@@ -102,6 +102,11 @@
 
 .card {
   padding: 2em;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
 .read-the-docs {
@@ -177,4 +182,9 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.badge {
+  font-size: 0.9rem;
+  padding: 8px 12px;
 }
