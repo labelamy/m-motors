@@ -88,7 +88,7 @@ function VehiculeDetail() {
 
   return (
     <div className="container py-5">
-      <button className="btn btn-link mb-3" onClick={() => navigate(-1)}>
+      <button className="btn btn-light border mb-3" onClick={() => navigate(-1)}>
         🔙 Retour
       </button>
 
@@ -112,7 +112,7 @@ function VehiculeDetail() {
           <p><strong>Type :</strong> {vehicule.type}</p>
           <p>{vehicule.description}</p>
 
-          <div className="mt-auto d-flex gap-2 flex-wrap">
+          <div className="mt-auto d-flex justify-content-between align-items-center">
             <button
               className={`btn ${isFavori ? "btn-danger" : "btn-outline-danger"}`}
               onClick={toggleFavori}
@@ -121,7 +121,7 @@ function VehiculeDetail() {
             </button>
 
             {vehicule.available && (
-              <button className="btn btn-primary" onClick={choisirVehicule}>
+              <button className="btn btn-primary px-4 fw-semibold" onClick={choisirVehicule}>
                 🚗 Choisir ce véhicule
               </button>
             )}
