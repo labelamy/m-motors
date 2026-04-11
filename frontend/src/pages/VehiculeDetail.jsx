@@ -14,25 +14,26 @@ function VehiculeDetail() {
 
   // 🔹 Récupérer détail véhicule
   const fetchVehicule = async () => {
-    try {
-      console.log("ID envoyé API =", id);
+  try {
+    const res = await API.get(`/vehicules/${id}`);
+    setVehicule(res.data);
+  } catch (error) {
+    console.log("Erreur véhicule :", error);
+    alert("Erreur récupération véhicule ❌");
+    navigate("/vehicules");
+    return;
+  }
 
-      const res = await API.get(`/vehicules/${id}`);
-      setVehicule(res.data);
-
-      // Vérifier si favori
-      const favRes = await API.get("/favoris");
-      setIsFavori(favRes.data.some(f => f.vehicule_id === res.data.id));
-    } catch (error) {
-      console.log("ERROR STATUS =", error.response?.status);
-      console.log("ERROR DATA =", error.response?.data);
-      console.log("ERROR FULL =", error);
-      alert("Erreur récupération véhicule ❌");
-      navigate("/vehicules");
-    } finally {
-      setLoading(false);
-    }
-  };
+  //  appel séparé (
+  try {
+    const favRes = await API.get("/favoris");
+    setIsFavori(favRes.data.some(f => f.vehicule_id === Number(id)));
+  } catch (error) {
+    console.log("Erreur favoris (non bloquant) :", error);
+  } finally {
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     console.log("ID URL:", id);
